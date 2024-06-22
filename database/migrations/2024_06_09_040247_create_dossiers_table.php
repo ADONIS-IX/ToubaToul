@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('parcelle_id')->nullable()->constrained()->cascadeOnDelete();
             $table->enum('type', array_column(TypeDossier::cases(), 'value'));
-            $table->string('slug');
+            $table->string('slug')->nullable();
             $table->enum('statut', array_column(EtatDossier::cases(), 'value'))->default(EtatDossier::En_attente->value);
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->timestamps();

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Enums\EtatDossier;
+use App\Enums\TypeDossier;
 use App\Http\Controllers\Controller;
 use App\Models\Dossier;
 use App\Models\User;
@@ -26,20 +27,14 @@ class ProprietaireController extends Controller
     }
 
 
-    /* Pour afficher les dossier en attente :
-
-        $dossiers = auth()->user()->userDossiers()->where('etat_dossier', EtatDossier::EN_ATTENTE)
-        ->paginate(10);
-
-    return view('dossiers.index', compact('dossiers'));
-    */
-
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
-        //
+        $types = TypeDossier::cases();
+
+        return view('proprietaire.dossier', compact('types'));
     }
 
     /**
@@ -53,9 +48,15 @@ class ProprietaireController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id): View
     {
-        //
+        $dossier = Dossier::with('pieceDossier', 'observations', 'parcelle.lotissement.localite','parcelle')->findOrFail($id);
+
+        if ($dossier->user_id != auth()->id()) {
+            abort(403, 'Vous n\'avez pas la permission de voir ce dossier.');
+        }
+
+        return view('proprietaire.show', compact('dossier'));
     }
 
     /**
