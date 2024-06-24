@@ -10,6 +10,8 @@ class PieceDossier extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['nom', 'dossier_id', 'user_id', 'is_admin'];
+
     public function dossier(): BelongsTo
     {
         return $this->belongsTo(Dossier::class);

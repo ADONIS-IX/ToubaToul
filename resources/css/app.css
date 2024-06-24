@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-[x-clock] {
+[x-cloak] {
     display: none !important;
 }
 

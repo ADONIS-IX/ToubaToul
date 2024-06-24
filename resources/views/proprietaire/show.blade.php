@@ -1,10 +1,10 @@
-<x-layout title="Tableau de bord">
+<x-layout>
     {{-- Nav side --}}
     <nav class="w-64 bg-gray-800 text-white p-4 space-y-4">
         <h2 class="text-xl font-bold mb-4">Navigation</h2>
         <ul class="space-y-2">
             <li>
-                <a href="{{ route('depositaire.index') }}" class="flex items-center px-4 py-2 rounded transition duration-300 hover:bg-gray-700">
+                <a href="{{ route('proprietaire.index') }}" class="flex items-center px-4 py-2 rounded transition duration-300 hover:bg-gray-700">
                     <i class="fas fa-tachometer-alt mr-2"></i> Tableau de Bord
                 </a>
             </li>
@@ -20,13 +20,18 @@
             </li>
             <li>
                 <a href="#" class="flex items-center px-4 py-2 rounded transition duration-300 hover:bg-gray-700">
+                    <i class="fas fa-folder-open mr-2"></i> Procédures
+                </a>
+            </li>
+            <li>
+                <a href="#" class="flex items-center px-4 py-2 rounded transition duration-300 hover:bg-gray-700">
                     <i class="fas fa-life-ring mr-2"></i> Support
                 </a>
             </li>
         </ul>
     </nav>
 
-    {{-- Main content --}}
+    <!-- Main content -->
     <main class="flex-1 bg-gray-200 p-8">
         <div class="container mx-auto mt-8">
             <div class="max-w-lg mx-auto">
@@ -63,6 +68,16 @@
                             <p class="text-lg font-medium text-gray-900">{{ $dossier->type }}</p>
                         </div>
                     </div>
+                    <div class="mt-5 flex flex-wrap -mx-2">
+                        <div class="w-full sm:w-1/2 px-2 mb-4 relative">
+                            <p class="text-sm font-semibold text-gray-600">Numéro parcelle :</p>
+                            <p class="text-lg font-medium text-gray-900">{{ $dossier->parcelle->numeroLot }}</p>
+                        </div>
+                        <div class="w-full sm:w-1/2 px-2 mb-4 relative">
+                            <p class="text-sm font-semibold text-gray-600">Localité :</p>
+                            <p class="text-lg font-medium text-gray-900">{{ $dossier->parcelle->lotissement->localite->nom }}</p>
+                        </div>
+                    </div>
                         <div class="mt-4">
                             <p class="text-sm font-semibold text-gray-600">Statut :</p>
                             <p class="text-2xl font-medium bg-amber-400 inline-flex text-gray-900">{{ $dossier->statut }}</p>
@@ -79,7 +94,7 @@
                             <p class="text-sm font-semibold text-gray-600">Pièces jointes :</p>
                             <ul class="mt-2">
                                 @forelse($dossier->pieceDossier as $piece)
-                                    <li><a href="{{ asset('storage/' . $piece->nom) }}" class="text-blue-500 hover:underline">{{ $piece->nom }}</a></li>
+                                    <li><a href="{{ asset('storage/' . $piece->nom) }}" target="_blanck" class="text-blue-500 hover:underline">{{ $piece->nom }}</a></li>
                                         @empty
                                         <p class="text-sm font-medium sm:pl-3 text-emerald-700">Aucune pièce pour ce dossier.</p>
                                 @endforelse
@@ -99,5 +114,4 @@
             </div>
         </div>
     </main>
-
-</x-layaout>
+</x-layout>
