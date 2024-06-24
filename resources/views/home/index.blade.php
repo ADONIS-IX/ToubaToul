@@ -1,111 +1,407 @@
-<!DOCTYPE html>
-<html lang="fr">
+<!doctype html>
+<html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE-edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ config('app.name') }}</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
-    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
-    <link rel="icon" href="{{ asset('2.ico') }}">
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Terra Plus</title>
+
+    <!-- CSS FILES -->
+    <link href="home/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="home/css/bootstrap-icons.css" rel="stylesheet">
+
+    <link href="home/css/templatemo-kind-heart-charity.css" rel="stylesheet">
+    <!--
+
+TemplateMo 581 Kind Heart Charity
+
+https://templatemo.com/tm-581-kind-heart-charity
+
+-->
+
 </head>
 
-<body class="antialiased">
-    <header class="bg-emerald-600 text-white py-4 px-6 sm:px-10 lg:px-20">
-        <div class="container mx-auto flex flex-wrap items-center justify-between">
-            <div class="w-full md:w-1/3">
-                <div class="flex items-center">
-                    <img src="{{ asset('2.png') }}" alt="Terraplus"
-                        class="h-10 w-10 mr-2 sm:h-12 sm:w-12 md:h-16 md:w-16 transition-transform duration-300 ease-in-out hover:rotate-12">
-                    <h1 class="text-2xl md:text-4xl font-bold">Terra+</h1>
+<body id="section_1">
+
+    <header class="site-header">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-8 col-12 d-flex flex-wrap">
+                    <p class="d-flex me-4 mb-0">
+                        <i class="bi-geo-alt me-2"></i>
+                        Touba Toul,Senegal
+                    </p>
+
+                    </p>
                 </div>
-                <p class="hidden md:flex items-center">Découvrez nos services et informations pratiques</p>
-            </div>
-            <div class="w-full md:w-2/3 flex justify-end items-center mt-4 md:mt-0">
-                <a href="{{ route('login') }}"
-                    class="mr-3 bg-white text-emerald-600 font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out transform hover:scale-105">Se connecter</a>
-                <a href="{{ route('inscription') }}"
-                    class="mr-1 bg-gradient-to-r from-pink-500 to-yellow-500 text-white font-bold py-2 px-4 rounded-full shadow-lg hover:from-pink-600 hover:via-red-600 hover:to-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 transition duration-300 ease-in-out transform hover:scale-105">S'inscrire</a>
+
+                <div class="col-lg-3 col-12 ms-auto d-lg-block d-none">
+                    <ul class="social-icon">
+                        <li class="social-icon-item">
+                            <a href="#" class="social-icon-link bi-twitter"></a>
+                        </li>
+
+                        <li class="social-icon-item">
+                            <a href="#" class="social-icon-link bi-facebook"></a>
+                        </li>
+
+                        <li class="social-icon-item">
+                            <a href="#" class="social-icon-link bi-instagram"></a>
+                        </li>
+
+                        <li class="social-icon-item">
+                            <a href="#" class="social-icon-link bi-youtube"></a>
+                        </li>
+
+                        <li class="social-icon-item">
+                            <a href="#" class="social-icon-link bi-whatsapp"></a>
+                        </li>
+                    </ul>
+                </div>
+
             </div>
         </div>
     </header>
-    <section class="bg-gray-200 p-8">
-        <div class="container mx-auto">
-            <h2 class="text-2xl md:text-4xl font-bold text-center mb-8">Nos services en ligne</h2>
-            <div class="flex flex-wrap -mx-3">
-                <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                    <div class="bg-white p-4 rounded-lg shadow-md"> <img src="https://via.placeholder.com/150"
-                            alt="Service 1" class="mb-4">
-                        <h3 class="text-xl font-bold mb-2">Service 1</h3>
-                        <p class="text-sm">Description du service 1</p>
-                    </div>
-                </div>
-                <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                    <div class="bg-white p-4 rounded-lg shadow-md"> <img src="https://via.placeholder.com/150"
-                            alt="Service 2" class="mb-4">
-                        <h3 class="text-xl font-bold mb-2">Service 2</h3>
-                        <p class="text-sm">Description du service 2</p>
-                    </div>
-                </div>
-                <div class="w-full md:w-1/3 px-3">
-                    <div class="bg-white p-4 rounded-lg shadow-md"> <img src="https://via.placeholder.com/150"
-                            alt="Service 3" class="mb-4">
-                        <h3 class="text-xl font-bold mb-2">Service 3</h3>
-                        <p class="text-sm">Description du service 3</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="bg-white p-8">
-        <div class="container mx-auto">
-            <h2 class="text-2xl md:text-4xl font-bold text-center mb-8">Actualités</h2>
-            <div class="flex flex-wrap -mx-3">
-                <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                    <div class="bg-gray-200 p-4 rounded-lg shadow-md">
-                        <h3 class="text-xl font-bold mb-2">Titre de l'actualité 1</h3>
-                        <p class="text-sm">Description de l'actualité 1</p> <a href="#"
-                            class="text-blue-500 hover:text-blue-700">En savoir plus</a>
-                    </div>
-                </div>
-                <div class="w-full md:w-1/2 px-3">
-                    <div class="bg-gray-200 p-4 rounded-lg shadow-md">
-                        <h3 class="text-xl font-bold mb-2">Titre de l'actualité 2</h3>
-                        <p class="text-sm">Description de l'actualité 2</p> <a href="#"
-                            class="text-blue-500 hover:text-blue-700">En savoir plus</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <footer class="bg-emerald-500 text-white p-8">
-        <div class="container mx-auto flex flex-wrap items-center">
-            <div class="w-full md:w-1/3">
-                <h3 class="text-xl font-bold">Coordonnées</h3>
-                <p class="text-sm">Adresse : 1 place de la mairie, 12345 Ville</p>
-                <p class="text-sm">Téléphone : 01 22 33 44 55</p>
-                <p class="text-sm">Email : <a href="mailto:contact@mairie-ville.fr"
-                        class="text-white hover:text-yellow-300">contact@mairie-ville.fr</a></p>
-            </div>
-            <div class="w-full md:w-1/3">
-                <h3 class="text-xl font-bold">Liens utiles</h3>
-                <ul>
-                    <li><a href="#" class="text-white hover:text-gray-300">À propos de la mairie</a></li>
-                    <li><a href="#" class="text-white hover:text-gray-300">Contactez-nous</a></li>
-                    <li><a href="#" class="text-white hover:text-gray-300">FAQ</a></li>
+
+    <nav class="navbar navbar-expand-lg bg-light shadow-lg">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="home/images/2.png" class="logo img-fluid" alt="Kind Heart Charity">
+                <span>
+                    Terra+
+                    <small>Au service de la commune de Touba Toul</small>
+                </span>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link click-scroll" href="#top">Accueil</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link click-scroll" href="#section_4">Contact</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link click-scroll" href="{{ route('login') }}">Connexion</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link click-scroll" href="{{ route('inscription') }}">Inscription</a>
+                    </li>
+
+
                 </ul>
             </div>
-            <div class="w-full md:w-1/3">
-                <h3 class="text-xl font-bold">Suivez-nous</h3>
-                <div class="flex"> <a href="#" class="text-white mx-1"><i class="fab fa-facebook-f"></i></a> <a
-                        href="#" class="text-white mx-1"><i class="fab fa-twitter"></i></a> <a href="#"
-                        class="text-white mx-1"><i class="fab fa-instagram"></i></a> </div>
+        </div>
+    </nav>
+
+    <main>
+
+        <section class="hero-section hero-section-full-height">
+            <div class="container-fluid">
+                <div class="row">
+
+                    <div class="col-lg-12 col-12 p-0">
+                        <div id="hero-slide" class="carousel carousel-fade slide" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <img src="home/images/slide/a (3).jpg"
+                                        class="carousel-image img-fluid" alt="...">
+
+                                    <div class="carousel-caption d-flex flex-column justify-content-end">
+                                        <h1>Parcelles</h1>
+
+                                        <p>des services efficaces pour une bonne gestion des habitats</p>
+                                    </div>
+                                </div>
+
+                                <div class="carousel-item">
+                                    <img src="home/images/slide/a.jpg"
+                                        class="carousel-image img-fluid" alt="...">
+
+                                    <div class="carousel-caption d-flex flex-column justify-content-end">
+                                        <h1>Construction</h1>
+
+                                        <p>rapidite,efficacite,disponiblite</p>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <button class="carousel-control-prev" type="button" data-bs-target="#hero-slide"
+                                data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+
+                            <button class="carousel-control-next" type="button" data-bs-target="#hero-slide"
+                                data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <section class="section-padding">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-10 col-12 text-center mx-auto">
+                        <h2 class="mb-5">Bienvenue dans Terra+ le site d'amenagement foncier pour la commune de Touba Toul</h2>
+                    </div>
+
+
+                </div>
+            </div>
+        </section>
+
+        <section class="section-padding section-bg" id="section_">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-6 col-12 mb-5 mb-lg-0">
+                        <img src="home/images/1.png"
+                            class="custom-text-box-image img-fluid" alt="">
+                    </div>
+
+                    <div class="col-lg-6 col-12">
+                        <div class="custom-text-box">
+                            <h2 class="mb-2">Description</h2>
+
+                            <h5 class="mb-3">Terra Plus</h5>
+
+                            <p class="mb-0">Pour une bonne assistance a la commune de Touba Toul, Terra+ est mise en place
+                                dans l'optique de simplifier la gestion des ressources foncieres .Il permet aux differents services municipaux
+                            de depasser les methodes manuelles effectues sur la gestion des parcelles et celles des demandes </p>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-12">
+                                <div class="custom-text-box mb-lg-0">
+                                    <h5 class="mb-3">Objectifs</h5>
+
+                                    <ul class="custom-list mt-2">
+                                        <li class="custom-list-item d-flex">
+                                            <i class="bi-check custom-text-box-icon me-2"></i>
+                                            Bonne gestion des parcelles
+                                        </li>
+
+                                        <li class="custom-list-item d-flex">
+                                            <i class="bi-check custom-text-box-icon me-2"></i>
+                                            efficacite et rapiditer traitement des demandes
+                                        </li>
+                                        <li class="custom-list-item d-flex">
+                                            <i class="bi-check custom-text-box-icon me-2"></i>
+                                            securite des donnes personelles
+                                        </li>
+                                        <li class="custom-list-item d-flex">
+                                            <i class="bi-check custom-text-box-icon me-2"></i>
+                                            un acces facile sur les differents services
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <section class="section-padding" id="section_">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-12 col-12 text-center mb-4">
+                        <h2>Nos Services</h2>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
+                        <div class="custom-block-wrap">
+                            <img src="home/images/causes/a (3).jpg"
+                                class="custom-block-image img-fluid" alt="">
+
+                            <div class="custom-block">
+                                <div class="custom-block-body">
+                                    <h5 class="mb-3">Gestion des parcelles</h5>
+
+                                    <p></p>
+
+                                    <div class="progress mt-4">
+                                        <div class="progress-bar w-100" role="progressbar" aria-valuenow="100"
+                                            aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
+                        <div class="custom-block-wrap">
+                            <img src="home/images/causes/c (2).jpg"
+                                class="custom-block-image img-fluid" alt="">
+
+                            <div class="custom-block">
+                                <div class="custom-block-body">
+                                    <h5 class="mb-3">Gestion des demandes permis de construction</h5>
+
+                                    <p></p>
+
+                                    <div class="progress mt-4">
+                                        <div class="progress-bar w-100" role="progressbar" aria-valuenow="100"
+                                            aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
+                        <div class="custom-block-wrap">
+                            <img src="home/images/causes/b (2).jpg"
+                                class="custom-block-image img-fluid" alt="">
+
+                            <div class="custom-block">
+                                <div class="custom-block-body">
+                                    <h5 class="mb-3">Gestion des demandes d'extrait de plan</h5>
+
+                                    <p></p>
+
+                                    <div class="progress mt-4">
+                                        <div class="progress-bar w-100" role="progressbar" aria-valuenow="100"
+                                            aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer" id="section_2">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-12 mb-4">
+                    <img src="home/images/2.png" class="logo img-fluid" alt="">
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-12 mb-4">
+                    <h5 class="site-footer-title mb-3">Liens</h5>
+
+                    <ul class="footer-menu">
+                        <li class="footer-menu-item"><a href="#" class="footer-menu-link">Description</a></li>
+
+                        <li class="footer-menu-item"><a href="#" class="footer-menu-link">Nos services</a></li>
+
+                        <li class="footer-menu-item"><a href="#" class="footer-menu-link">.</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-12 mx-auto">
+                    <h5 class="site-footer-title mb-3">Information Contact</h5>
+
+                    <p class="text-white d-flex mb-2">
+                        <i class="bi-telephone me-2"></i>
+
+                        <a href="tel: 305-240-9671" class="site-footer-link">
+                            305-240-9671
+                        </a>
+                    </p>
+
+                    <p class="text-white d-flex">
+                        <i class="bi-envelope me-2"></i>
+
+                        <a href="waderane3@gmail.com" class="site-footer-link">
+                            S.domaniale@gmail.com
+
+                        </a>
+                    </p>
+
+                    <p class="text-white d-flex mt-3">
+                        <i class="bi-geo-alt me-2"></i>
+                       Touba Toul, Senegal
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="site-footer-bottom">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-6 col-md-7 col-12">
+                        <p class="copyright-text mb-0">Copyright © 2024 <a href="#">Terra+</a> Charity Org.
+                            Design: <a href="https://templatemo.com" target="_blank">TemplateMo</a><br>Distribution:
+                            <a href="https://themewagon.com">ThemeWagon</a>
+                        </p>
+                    </div>
+
+                    <div class="col-lg-6 col-md-5 col-12 d-flex justify-content-center align-items-center mx-auto">
+                        <ul class="social-icon">
+                            <li class="social-icon-item">
+                                <a href="#" class="social-icon-link bi-twitter"></a>
+                            </li>
+
+                            <li class="social-icon-item">
+                                <a href="#" class="social-icon-link bi-facebook"></a>
+                            </li>
+
+                            <li class="social-icon-item">
+                                <a href="#" class="social-icon-link bi-instagram"></a>
+                            </li>
+
+                            <li class="social-icon-item">
+                                <a href="#" class="social-icon-link bi-linkedin"></a>
+                            </li>
+
+                            <li class="social-icon-item">
+                                <a href="https://youtube.com/templatemo" class="social-icon-link bi-youtube"></a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
             </div>
         </div>
     </footer>
+
+    <!-- JAVASCRIPT FILES -->
+    <script src="home/js/jquery.min.js"></script>
+    <script src="home/js/bootstrap.min.js"></script>
+    <script src="home/js/jquery.sticky.js"></script>
+    <script src="home/js/click-scroll.js"></script>
+    <script src="home/js/counter.js"></script>
+    <script src="home/js/custom.js"></script>
+
 </body>
 
 </html>
