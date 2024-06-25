@@ -93,10 +93,11 @@
                         <div class="mt-4">
                             <p class="text-sm font-semibold text-gray-600">Observations :</p>
                             <ul class="mt-2">
-                                @foreach ($dossier->observations as $observation)
+                                @forelse ($dossier->observations as $observation)
                                 <li><p class="text-sm font-medium sm:pl-3 text-red-500"> - {{ $observation->content }}</p></li>
-
-                                @endforeach
+                                @empty
+                                <p class="text-sm font-medium sm:pl-3 text-emerald-700">Aucune observation pour ce dossier.</p>
+                                @endforelse
                             </ul>
                         </div>
                     </div>
