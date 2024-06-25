@@ -5,8 +5,12 @@ namespace App\Http\Controllers\User;
 use App\Enums\EtatDossier;
 use App\Enums\TypeDossier;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\TerrainRequest;
 use App\Models\Dossier;
+use App\Models\PieceDossier;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class DepositaireController extends Controller
@@ -26,15 +30,34 @@ class DepositaireController extends Controller
      */
     public function create()
     {
-        //
+        $types = TypeDossier::cases();
+        return view('depositaire.dossier', compact('types'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(TerrainRequest $request)
     {
-        //
+        $dossier = Dossier::create([
+            'type' => 'Terrain',
+            'slug' => 'terrain',
+            'user_id' => Auth::id(),
+
+        ]);
+
+        if ($request->hasFile('piece_identite')) {
+            $path = $request->file('piece_identite')->store('piece_identite', 'public');
+
+            // Créer l'entrée dans la table piece_dossiers
+            PieceDossier::create([
+                'nom' => $path,
+                'dossier_id' => $dossier->id,
+                'user_id' => Auth::id(),
+                'is_admin' => false, // ou true si l'admin l'ajoute
+            ]);
+        }
+        return redirect()->route('depositaire.index')->withStatus('Dossier créé avec succès');
     }
 
     /**
@@ -71,8 +94,17 @@ class DepositaireController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $dossier = Dossier::findOrFail($id);
+        // Supprimer les fichiers associés aux pièces d'identité
+        foreach ($dossier->pieceDossier as $piece) {
+            Storage::disk('public')->delete($piece->nom);
+        }
+
+        // Supprimer le dossier et les pièces associées
+        $dossier->delete();
+
+        return redirect()->route('depositaire.index')->withStatus('Dossier supprimé avec succès');
     }
 }

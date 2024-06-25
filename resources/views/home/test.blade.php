@@ -26,3 +26,34 @@
       <span class="text-[0px] group-hover:text-sm duration-300">Attribuer une nouvelle parcelle</span>
     </div>
 </a>
+
+
+
+<div class="container mx-auto p-12">
+    <div class="bg-white shadow-md rounded-lg overflow-hidden">
+
+        <table class="min-w-full bg-white divide-y divide-gray-300">
+            <thead class="bg-gray-800 text-white">
+                <tr>
+                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold uppercase sm:pl-3">ID</th>
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold uppercase">numeroLot</th>
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold uppercase">Superficie</th>
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold uppercase">Localite</th>
+                    <th scope="col" class="px-3 py-3.5 uppercase font-semibold text-left text-sm">Longitude</th>
+                    <th scope="col" class="px-3 py-3.5 uppercase font-semibold text-left text-sm">Latitude</th>
+                    <th scope="col" class="px-3 py-3.5 uppercase font-semibold text-left text-sm">Droit propriete</th>
+                    <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-3"></th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+                <tr class="hover:bg-teal-50 even:bg-gray-50">
+                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-3">9</td>
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">Lot-631</td>
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">300</td>
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">Touba</td>
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">1255662158</td>
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">854552555552</td>
+                    <td class="whitespace-nowrap py-4 px-3 text-sm">bail | attestation</td>
+                </tr>
+    </div>
+</div>

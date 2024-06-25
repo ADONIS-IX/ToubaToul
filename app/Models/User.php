@@ -18,7 +18,7 @@ class User extends Authenticatable
     // Un utilisateur possède plusieurs parcelles
     public function parcelles()
     {
-        return $this->hasMany(Parcelle::class);
+        return $this->hasMany(Parcelle::class, 'proprietaire_id');
     }
 
     // Un utilisateur gère plusieurs parcelles

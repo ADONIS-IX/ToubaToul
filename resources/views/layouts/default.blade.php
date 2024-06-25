@@ -15,7 +15,7 @@
 
 <body class="antialiased flex flex-col min-h-screen bg-gray-100">
     <!-- Header -->
-    <header class="bg-emerald-600 text-white py-3 px-6 sm:px-10 lg:px-20 shadow-md" x-data="{ dropdownOpen: false }">
+    <header class="bg-emerald-600 text-white py-3 px-6 sm:px-10 lg:px-20 shadow-md sticky top-0" x-data="{ dropdownOpen: false }">
         <div class="container mx-auto flex items-center justify-between">
             <div class="flex items-center space-x-2">
                 <img src="{{ asset('2.png') }}" alt="Terra+" class="h-10 w-10 sm:h-12 sm:w-12 md:h-16 md:w-16 transition duration-300 hover:rotate-12">

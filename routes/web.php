@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DomanialeInstructionController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LotController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\User\AgentCadastraleController;
@@ -33,6 +34,10 @@ Route::get('/profil', [ProfilController::class, 'index'])->name('profil');
 Route::patch('/profil', [ProfilController::class, 'updateProfil']);
 Route::get('/profil/password-update', [PasswordController::class, 'index'])->name('password');
 Route::patch('/profil/password-update', [PasswordController::class, 'updatePassword']);
+
+Route::get('/lot', [LotController::class, 'index'])->name('lot');
+
+
 
 
 Route::middleware(['auth'])->group(function () {
