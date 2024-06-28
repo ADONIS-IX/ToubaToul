@@ -13,47 +13,38 @@ use Illuminate\Http\Request;
 class AgentDomanialeController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $dossiers = Dossier::with(['user'])
-        ->where('type', [TypeDossier::Terrain])
-        ->where('statut', EtatDossier::En_attente)
-        /**->whereDoesntHave('observations.user', function ($query) {
-            $query->where('role', Role::Agent_Domaniale);
-            }) */
-        ->oldest()
-        ->paginate(10);
+        $status = $request->query('status', EtatDossier::En_attente->value);
+        $search = $request->query('search');
 
-        $totalDossiers = Dossier::whereIn('type', [TypeDossier::Terrain])
-        ->whereIn('statut', EtatDossier::cases())
-        ->whereHas('observations.user', function ($query) {
-            $query->where('role', Role::Agent_Domaniale);})->count();
+        $query = Dossier::with(['user'])
+            ->where('type', TypeDossier::Terrain);
 
-        /**
-         * (ici pour recuperer uniquement le total des dossier Approuve)
-        *$totalDossiers = Dossier::whereIn('type', [TypeDossier::Terrain])
-        *->where('statut', EtatDossier::Approuve)
-        *->whereHas('observations.user', function ($query) {
-        *    $query->where('role', Role::Agent_Domaniale);})->count();
-        */
+        if ($status !== 'all') {
+            $query->where('statut', $status);
+        }
 
-        $totalApprouve = Dossier::whereIn('type', [TypeDossier::Terrain])
-        ->whereIn('statut', [EtatDossier::En_attente, EtatDossier::Approuve])
-        ->whereHas('observations', function ($query) {
-            $query->whereHas('user', function ($query) {
-                $query->where('role', Role::Agent_Domaniale);
-            })->where('avis', Avis::Favorable);
-        })->count();
+        if ($search) {
+            $query->where(function($q) use ($search) {
+                $q->where('id', 'like', "%{$search}%")
+                  ->orWhereHas('user', function($q) use ($search) {
+                      $q->where('nom', 'like', "%{$search}%")
+                        ->orWhere('prenom', 'like', "%{$search}%")
+                        ->orWhere('adresse', 'like', "%{$search}%");
+                  });
+            });
+        }
 
-        $totalRefuse = Dossier::whereIn('type', [TypeDossier::Terrain])
-        ->where('statut', EtatDossier::En_attente)
-        ->whereHas('observations', function ($query) {
-            $query->whereHas('user', function ($query) {
-                $query->where('role', Role::Agent_Domaniale);
-            })->where('avis', Avis::Reserve);
-        })->count();
+        $dossiers = $query->oldest()->paginate(10);
 
-        $totalAttente = $dossiers->total();
+        $totalDossiers = Dossier::where('type', TypeDossier::Terrain)->count();
+        $totalApprouve = Dossier::where('type', TypeDossier::Terrain)
+            ->where('statut', EtatDossier::Approuve)->count();
+        $totalRefuse = Dossier::where('type', TypeDossier::Terrain)
+            ->where('statut', EtatDossier::Refuse)->count();
+        $totalAttente = Dossier::where('type', TypeDossier::Terrain)
+            ->where('statut', EtatDossier::En_attente)->count();
 
         return view('agent.domaniale.index', [
             'dossiers' => $dossiers,
@@ -61,6 +52,8 @@ class AgentDomanialeController extends Controller
             'totalApprouve' => $totalApprouve,
             'totalRefuse' => $totalRefuse,
             'totalAttente' => $totalAttente,
+            'currentStatus' => $status,
+            'search' => $search,
         ]);
     }
 

@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('observations', function (Blueprint $table) {
             $table->id();
-            $table->string('content');
+            $table->string('content')->nullable();
             $table->enum('avis', array_column(Avis::cases(), 'value'));
             $table->foreignId('dossier_id')->constrained()->cascadeOnDelete();
             $table->foreignId('agent_id')->constrained('users')->cascadeOnDelete();

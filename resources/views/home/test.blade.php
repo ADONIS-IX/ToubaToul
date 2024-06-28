@@ -57,3 +57,13 @@
                 </tr>
     </div>
 </div>
+
+
+{{-- // svg visage souriant
+    <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+  <circle cx="12" cy="12" r="9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M8 14s1.5 2 4 2 4-2 4-2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="9" y1="9" x2="9.01" y2="9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="15" y1="9" x2="15.01" y2="9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+--}}
