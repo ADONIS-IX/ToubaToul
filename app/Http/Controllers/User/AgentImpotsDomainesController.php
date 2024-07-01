@@ -6,6 +6,7 @@ use App\Enums\EtatDossier;
 use App\Enums\TypeDossier;
 use App\Http\Controllers\Controller;
 use App\Models\Dossier;
+use App\Models\Parcelle;
 use Illuminate\Http\Request;
 
 class AgentImpotsDomainesController extends Controller
@@ -48,7 +49,20 @@ class AgentImpotsDomainesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'numeroLot' => 'required|unique:parcelles,numeroLot',
+            'superficie' => 'required|numeric',
+            'coordonne_x' => 'required|numeric',
+            'coordonne_y' => 'required|numeric',
+            'lotissement_id' => 'required|exists:lotissements,id',
+            'statut_parcelle_id' => 'required|exists:statut_parcelles,id',
+            'proprietaire_id' => 'required|exists:users,id',
+        ]);
+
+        Parcelle::create($validated);
+
+        return redirect()->route('impots-domaines.index')->with('success', 'Parcelle créée avec succès.');
+
     }
 
     /**
@@ -56,7 +70,7 @@ class AgentImpotsDomainesController extends Controller
      */
     public function show(string $id)
     {
-        //
+       //
     }
 
     /**

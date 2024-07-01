@@ -1,4 +1,4 @@
-<x-layout>
+<x-layout title="Tableau de bord">
     {{-- Nav-side --}}
     <nav class="fixed top-30 h-screen left-0 w-64 bg-emerald-900 text-white p-4 space-y-4">
         <h2 class="text-xl font-bold mb-4">Navigation</h2>
@@ -91,12 +91,12 @@
                 </div>
             </div>
 
-            <a class="inline-flex group relative justify-center items-center text-zinc-600 text-sm font-bold">
+            <a href="#" class="inline-flex group relative justify-center items-center text-zinc-600 text-sm font-bold">
                 <div class="shadow-md flex items-center group-hover:gap-2 bg-gradient-to-br from-lime-200 to-yellow-200 p-3 rounded-full cursor-pointer duration-300">
                     <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 17h6m-3 3v-6M4.857 4h4.286c.473 0 .857.384.857.857v4.286a.857.857 0 0 1-.857.857H4.857A.857.857 0 0 1 4 9.143V4.857C4 4.384 4.384 4 4.857 4Zm10 0h4.286c.473 0 .857.384.857.857v4.286a.857.857 0 0 1-.857.857h-4.286A.857.857 0 0 1 14 9.143V4.857c0-.473.384-.857.857-.857Zm-10 10h4.286c.473 0 .857.384.857.857v4.286a.857.857 0 0 1-.857.857H4.857A.857.857 0 0 1 4 19.143v-4.286c0-.473.384-.857.857-.857Z"/>
-                      </svg>
-                  <span class="text-[0px] group-hover:text-sm duration-300">Attribuer une nouvelle parcelle</span>
+                    </svg>
+                    <span class="text-[0px] group-hover:text-sm duration-300">Attribuer une nouvelle parcelle</span>
                 </div>
             </a>
 
@@ -146,11 +146,11 @@
                             <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">{{ $dossier->statut }}</td>
                             <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">@datetime($dossier->created_at)</td>
                             <td class="whitespace-nowrap py-4 px-3 text-sm">
-                                <a href="{{ route('domaniale.show', $dossier->id) }}" target="_blank" class="text-indigo-600 hover:text-emerald-400">Voir</a>
+                                <a href="{{ route('domaniale.show', $dossier->id) }}" class="text-indigo-600 hover:text-emerald-400">Voir</a>
                             </td>
 
                             <td x-data class="inline-flex relative whitespace-nowrap py-4 pl-3 pr-4 sm:pr-3 text-sm text-right font-medium">
-                                <a href="#" class="text-indigo-600 hover:text-emerald-400">
+                                <a href="{{ route('domaniale.edit', $dossier->id) }}" class="text-indigo-600 hover:text-emerald-400">
                                     <span class="flex items-center">
                                         <svg class="h-5 w-5 text-slate-500 mr-1"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
@@ -176,4 +176,5 @@
             {{ $dossiers->links() }}
         </div>
     </main>
+
 </x-layout>

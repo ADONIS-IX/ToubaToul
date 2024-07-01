@@ -7,13 +7,21 @@ use App\Enums\EtatDossier;
 use App\Enums\Role;
 use App\Enums\TypeDossier;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdateDomanialeDossierRequest;
 use App\Models\Dossier;
+use App\Models\DroitPropriete;
+use App\Models\Lotissement;
+use App\Models\Parcelle;
+use App\Models\PieceDossier;
+use App\Models\StatutParcelle;
+use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class AgentDomanialeController extends Controller
 {
 
-    public function index(Request $request)
+    public function index(Request $request): View
     {
         $status = $request->query('status', EtatDossier::En_attente->value);
         $search = $request->query('search');
@@ -76,25 +84,88 @@ class AgentDomanialeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id): View
     {
-        //
+        $dossier = Dossier::with('pieceDossier')->findOrFail($id);
+
+        return view('agent.domaniale.show', compact('dossier'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $id): View
     {
-        //
+        $dossier = Dossier::with('pieceDossier')->findOrFail($id);
+        $lotissements = Lotissement::all();
+        $status = StatutParcelle::all();
+        $etats = EtatDossier::cases();
+        $droitsPropriete = DroitPropriete::all();
+        $roles = Role::cases();
+
+        return view('agent.domaniale.dossier', compact('dossier', 'lotissements', 'status', 'etats', 'droitsPropriete', 'roles'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateDomanialeDossierRequest $request, string $id)
     {
-        //
+        $validated = $request->validated();
+
+        $dossier = Dossier::findOrFail($id);
+
+         // Gérer le fichier du plan de lotissement
+    if ($request->hasFile('plan_lotissement')) {
+        $path = $request->file('plan_lotissement')->store('dossiers/' . $dossier->id . '/plans_lotissement', 'public');
+
+        // Créer une nouvelle PieceDossier
+        PieceDossier::create([
+            'nom' => $path,
+            'dossier_id' => $dossier->id,
+            'user_id' => auth()->id(),
+            'is_admin' => true,
+            //'chemin' => 'Plan de Lotissement',
+        ]);
+    }
+
+    if ($validated['statut'] === EtatDossier::Approuve->value) {
+        // Créer la nouvelle parcelle
+        $parcelle = Parcelle::create([
+            'numeroLot' => $validated['numeroLot'],
+            'superficie' => $validated['superficie'],
+            'coordonne_x' => $validated['coordonne_x'],
+            'coordonne_y' => $validated['coordonne_y'],
+            'lotissement_id' => $validated['lotissement_id'],
+            'statut_parcelle_id' => $validated['statut_parcelle_id'],
+            'proprietaire_id' => $dossier->user_id,
+        ]);
+
+        // Associer les droits de propriété à la parcelle
+        $parcelle->droitProprietes()->attach($validated['droit_propriete']);
+
+         // Mettre à jour le dossier avec la nouvelle parcelle
+        $dossier->update([
+            'statut' => $validated['statut'],
+            'parcelle_id' => $parcelle->id,
+        ]);
+
+        // Vérifier si l'utilisateur est dépositaire et mettre à jour son rôle
+        if ($dossier->user->role === Role::Depositaire) {
+            $dossier->user->update(['role' => Role::Proprietaire]);
+        }
+
+    } else {
+        // Mise à jour du statut uniquement si le dossier est refusé
+        $dossier->update([
+            'statut' => $validated['statut'],
+        ]);
+    }
+
+    // Associer l'agent au dossier
+    $dossier->users()->syncWithoutDetaching([auth()->id()]);
+
+        return redirect()->route('domaniale.index')->withStatus('Dossier mis à jour et parcelle créée avec succès.');
     }
 
     /**

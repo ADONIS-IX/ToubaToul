@@ -152,6 +152,7 @@
                                                 <h2 class="font-bold text-slate-900 text-lg">{{ $observation->user->prenom }} {{ $observation->user->nom }}</h2>
                                                 <time class="mt-2 sm:mt-0 sm:ml-4 text-xs text-slate-400" datetime="{{ $observation->created_at }}">@datetime($observation->created_at)</time>
                                             </div>
+                                            <p class="mt-4 text-slate-500 sm:leading-loose">{{ $observation->avis }}</p>
                                             <p class="mt-4 text-slate-500 sm:leading-loose">{{ $observation->content }}</p>
                                         </div>
                                     </div>

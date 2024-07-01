@@ -67,3 +67,46 @@
   <line x1="15" y1="9" x2="15.01" y2="9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
 --}}
+
+
+
+ {{-- formulaire modale d'ajout d'une parcelle --}}
+ <div x-data="{ showModal: false }">
+    <div x-show="showModal" class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+
+    <div x-show="showModal" class="fixed inset-0 z-10 overflow-y-auto">
+        <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+            <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+                    <h3 class="text-lg font-medium leading-6 text-gray-900" id="modal-title">Attribuer une nouvelle parcelle</h3>
+                    <div class="mt-2">
+                        <form action="{{ route('domaniale.store') }}" method="POST">
+                            @csrf
+                            <div class="mb-4">
+                                <label for="numeroLot" class="block text-sm font-medium text-gray-700">Numéro de Lot</label>
+                                <input type="text" name="numeroLot" id="numeroLot" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                            </div>
+                            <div class="mb-4">
+                                <label for="superficie" class="block text-sm font-medium text-gray-700">Superficie</label>
+                                <input type="number" step="0.01" name="superficie" id="superficie" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                            </div>
+                            <div class="mb-4">
+                                <label for="coordonne_x" class="block text-sm font-medium text-gray-700">Coordonnée X</label>
+                                <input type="number" step="0.000001" name="coordonne_x" id="coordonne_x" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                            </div>
+                            <div class="mb-4">
+                                <label for="coordonne_y" class="block text-sm font-medium text-gray-700">Coordonnée Y</label>
+                                <input type="number" step="0.000001" name="coordonne_y" id="coordonne_y" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                            </div>
+                            <!-- Ajoutez d'autres champs selon vos besoins -->
+                            <div class="mt-4">
+                                <button type="submit" class="inline-flex justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Enregistrer</button>
+                                <button type="button" @click="showModal = false" class="ml-3 inline-flex justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Annuler</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

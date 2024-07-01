@@ -17,6 +17,16 @@ class Parcelle extends Model
         'lotissement',
     ];
 
+    protected $fillable = [
+        'numeroLot',
+        'superficie',
+        'coordonne_x',
+        'coordonne_y',
+        'lotissement_id',
+        'statut_parcelle_id',
+        'proprietaire_id',
+    ];
+
     /*
     public function getRouteKeyName(): string
     {
