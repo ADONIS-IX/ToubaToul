@@ -32,7 +32,7 @@
     </nav>
 
     <!-- Main content -->
-    <main class="ml-64 flex flex-1 items-center justify-center bg-gradient-to-r from-emerald-100 to-lime-100 min-h-screen">
+    <main class="ml-64 flex-1 items-center justify-center bg-gradient-to-r from-emerald-100 to-lime-100 min-h-screen p-8">
         <div class="container mx-auto mt-8">
             <div class="max-w-lg mx-auto">
                 <div class="shadow-md rounded-lg overflow-hidden bg-emerald-50">
@@ -103,17 +103,53 @@
                         </div>
                         <div class="mt-4">
                             <p class="text-sm font-semibold text-gray-600">Pièces jointes :</p>
-                            <ul class="mt-2">
-                                @forelse($dossier->pieceDossier as $piece)
-                                    <li><a href="{{ asset('storage/' . $piece->nom) }}" target="_blanck" class="text-blue-500 hover:underline">{{ $piece->nom }}</a></li>
+                            <div class="mt-2 space-y-4">
+                                <!-- Section for other pieces -->
+                                <div>
+                                    <h3 class="text-md font-semibold text-gray-600">Vos pièces :</h3>
+                                    <ul class="mt-2 space-y-2">
+                                        @forelse($dossier->pieceDossier->where('is_admin', false) as $piece)
+                                            <li class="flex items-center bg-white p-4 rounded-lg shadow hover:shadow-md transition-shadow duration-300">
+                                                <a href="{{ asset('storage/' . $piece->nom) }}" target="_blank" class="flex items-center text-blue-500 hover:underline transition duration-300 ease-in-out">
+                                                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                                                    </svg>
+                                                    {{ $piece->nom }}
+                                                </a>
+                                            </li>
                                         @empty
-                                        <p class="text-sm font-medium sm:pl-3 text-emerald-700">Aucune pièce pour ce dossier.</p>
-                                @endforelse
-                            </ul>
+                                            <p class="text-sm font-medium sm:pl-3 text-emerald-700">Aucune pièces pour ce dossier.</p>
+                                        @endforelse
+                                    </ul>
+                                </div>
+
+                                 <!-- Section for Admin pieces -->
+                                @if (($dossier->pieceDossier->where('is_admin', true)))
+                                 <div>
+                                        <h3 class="text-md font-semibold text-red-500">Pièces Agent :</h3>
+                                        <ul class="mt-2 space-y-2">
+                                            @forelse($dossier->pieceDossier->where('is_admin', true) as $piece)
+                                                <li class="flex items-center bg-white p-4 rounded-lg shadow hover:shadow-md transition-shadow duration-300">
+                                                    <a href="{{ asset('storage/' . $piece->nom) }}" target="_blank" class="flex items-center text-blue-500 hover:underline transition duration-300 ease-in-out">
+                                                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                                                        </svg>
+                                                        {{ $piece->nom }}
+                                                    </a>
+                                                </li>
+                                            @empty
+                                                <p class="text-sm font-medium sm:pl-3 text-emerald-700">Aucune pièce admin pour ce dossier.</p>
+                                            @endforelse
+                                        </ul>
+                                    </div>
+                                @endif
+
+                            </div>
                         </div>
+
                         <div class="mt-4">
-                            <p class="text-sm font-semibold text-gray-600">Observations :</p>
-                            <ul class="mt-2">
+                            <h3 class="text-sm font-semibold text-gray-800 mb-4">Observations</h3>
+                            <ul class="bg-gray-50 p-4 rounded-lg space-y-2">
                                 @forelse ($dossier->observations as $observation)
                                 <li><p class="text-sm font-medium sm:pl-3 text-red-500"> - {{ $observation->content }}</p></li>
                                 @empty

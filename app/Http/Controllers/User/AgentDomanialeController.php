@@ -86,7 +86,7 @@ class AgentDomanialeController extends Controller
      */
     public function show(string $id): View
     {
-        $dossier = Dossier::with('pieceDossier')->findOrFail($id);
+        $dossier = Dossier::with('pieceDossier', 'parcelle')->findOrFail($id);
 
         return view('agent.domaniale.show', compact('dossier'));
     }
@@ -129,6 +129,19 @@ class AgentDomanialeController extends Controller
         ]);
     }
 
+    if ($request->hasFile('notification')) {
+        $path = $request->file('notification')->store('dossiers/' . $dossier->id . '/notification', 'public');
+
+        // Créer une nouvelle PieceDossier
+        PieceDossier::create([
+            'nom' => $path,
+            'dossier_id' => $dossier->id,
+            'user_id' => auth()->id(),
+            'is_admin' => true,
+            //'chemin' => 'notification d'attribution',
+        ]);
+    }
+
     if ($validated['statut'] === EtatDossier::Approuve->value) {
         // Créer la nouvelle parcelle
         $parcelle = Parcelle::create([
@@ -154,6 +167,16 @@ class AgentDomanialeController extends Controller
         if ($dossier->user->role === Role::Depositaire) {
             $dossier->user->update(['role' => Role::Proprietaire]);
         }
+
+        /*
+        // Rechercher le DroitPropriete de type Attribution
+        $droitAttribution = DroitPropriete::where('type', 'Attribution')
+        ->orWhere('slug', 'attribution')
+        ->first();
+
+        // Synchroniser la parcelle avec le droit de propriété Bail
+        $dossier->parcelle->droitProprietes()->syncWithoutDetaching([$droitAttribution->id]);
+         */
 
     } else {
         // Mise à jour du statut uniquement si le dossier est refusé

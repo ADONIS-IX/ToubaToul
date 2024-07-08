@@ -7,6 +7,7 @@ use App\Enums\TypeDossier;
 use App\Http\Controllers\Controller;
 use App\Models\Dossier;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class AgentUrbanismeController extends Controller
 {
@@ -54,9 +55,11 @@ class AgentUrbanismeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id): View
     {
-        //
+        $dossier = Dossier::with('pieceDossier', 'parcelle')->findOrFail($id);
+
+        return view('agent.urbanisme.show', compact('dossier'));
     }
 
     /**

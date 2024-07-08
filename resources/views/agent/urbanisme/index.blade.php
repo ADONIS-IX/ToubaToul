@@ -103,7 +103,7 @@
                             <td class="whitespace-nowrap py-4 px-3 text-sm">{{ $dossier->statut }}</td>
                             <td class="whitespace-nowrap py-4 px-3 text-sm">@datetime($dossier->created_at)</td>
                             <td class="whitespace-nowrap py-4 px-3 text-sm">
-                                <a href="{{ route('urbanisme.show', $dossier->id) }}" target="_blank" class="text-indigo-600 hover:text-emerald-400">Voir</a>
+                                <a href="{{ route('urbanisme.show', $dossier->id) }}" class="text-indigo-600 hover:text-emerald-400">Voir</a>
                             </td>
 
                             <td x-data class="inline-flex relative whitespace-nowrap py-4 pl-3 pr-4 sm:pr-3 text-sm text-right font-medium">
