@@ -18,7 +18,7 @@ class PieceDossierSeeder extends Seeder
         $dossiers = Dossier::all();
         $users = User::all();
 
-        PieceDossier::factory(80)
+        PieceDossier::factory(180)
         ->sequence(fn () => [
             'dossier_id' => $dossiers->random(),
             'user_id' => $users->random(),

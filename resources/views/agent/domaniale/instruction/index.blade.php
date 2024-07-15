@@ -19,11 +19,6 @@
                 </a>
             </li>
             <li>
-                <a href="#" class="flex items-center px-4 py-2 rounded transition duration-300 hover:bg-yellow-500">
-                    <i class="fas fa-folder-open mr-2"></i> Procédures
-                </a>
-            </li>
-            <li>
                 <a href="{{ route('domaniale.instruction.index') }}" class="flex items-center px-4 py-2 rounded transition duration-300 bg-yellow-500">
                     <i class="fas fa-file-alt mr-2"></i> Instructions dossiers
                 </a>

@@ -16,7 +16,7 @@ class ChefLocaliteSeeder extends Seeder
     {
         $localites = Localite::all();
 
-        ChefLocalite::factory(5)
+        ChefLocalite::factory(10)
         ->sequence(fn () => [
             'localite_id' => $localites->random(),
         ])
