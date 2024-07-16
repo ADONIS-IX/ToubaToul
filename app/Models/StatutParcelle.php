@@ -14,4 +14,9 @@ class StatutParcelle extends Model
     {
         return $this->hasMany(Parcelle::class);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

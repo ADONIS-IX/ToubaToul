@@ -386,7 +386,8 @@
                 <button type="submit"
                     class=
                     "bg-emerald-600 text-white hover:bg-emerald-500 font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out transform hover:scale-105">
-                    Créer un compte</button>
+                    Créer un compte
+                </button>
             </form>
         </div>
     </main>

@@ -38,4 +38,8 @@ class Dossier extends Model
     {
         return $this->belongsToMany(User::class);
     }
+
+    protected $table = 'dossiers';
+
+    protected $fillable = ['type', 'slug', 'user_id'];
 }

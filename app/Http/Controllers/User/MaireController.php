@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Enums\EtatParcelle;
+use App\Models\Parcelle;
 use Illuminate\Http\Request;
+use App\Models\Dossier;
+use Illuminate\Support\Facades\DB;
 
 class MaireController extends Controller
 {
@@ -12,8 +16,28 @@ class MaireController extends Controller
      */
     public function index()
     {
-        return view('maire.index');
+        // Récupérer le nombre total de dossiers
+        $totalDossiers = Dossier::count();
+
+        // Récupérer les données pour le diagramme en barre
+        $data = Dossier::select('type', DB::raw('count(*) as total'))
+                       ->groupBy('type')
+                       ->get();
+
+        // Structurez vos données pour le diagramme en barre
+        $labels = $data->pluck('type')->toArray();
+        $prices = $data->pluck('total')->toArray();
+
+        // Calculer les totaux pour le diagramme circulaire
+        $totalParcelles = Parcelle::count();
+        $totalConstruction = Parcelle::where('statut_parcelle_id', EtatParcelle::Construction)->count();
+        $totalLibre = Parcelle::where('statut_parcelle_id', EtatParcelle::Libre)->count();
+        $totalBatie = Parcelle::where('statut_parcelle_id', EtatParcelle::Batie)->count();
+
+        return view('maire.index', compact('labels', 'prices', 'totalDossiers', 'totalBatie', 'totalConstruction', 'totalLibre'));
     }
+
+
 
     /**
      * Show the form for creating a new resource.

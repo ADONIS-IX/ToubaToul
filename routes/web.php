@@ -5,6 +5,10 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DomanialeInstructionController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LotController;
+use App\Http\Controllers\MaireDemandeController;
+use App\Http\Controllers\MaireLocaliteController;
+use App\Http\Controllers\MaireLotissementController;
+use App\Http\Controllers\MaireParcelleController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\User\AgentCadastraleController;
@@ -40,6 +44,7 @@ Route::get('/lot', [LotController::class, 'index'])->name('lot');
 
 
 
+
 Route::middleware(['auth'])->group(function () {
     Route::middleware(['role:agent_domaniale'])->group(function () {
         Route::resource('/agent/domaniale', AgentDomanialeController::class);
@@ -62,6 +67,13 @@ Route::middleware(['auth'])->group(function () {
     });
     Route::middleware(['role:maire'])->group(function () {
         Route::resource('/maire', MaireController::class);
+        Route::get('/mairie/demande', [MaireDemandeController::class,'index'])->name('demande');
+        Route::get('/mairie/parcelle', [MaireParcelleController::class,'index'])->name('parcelle');
+        Route::get('/mairie/localite', [MaireLocaliteController::class,'index'])->name('localite');
+        Route::post('/localite', [MaireLocaliteController::class, 'store'])->name('store');
+        Route::get('/mairie/lotissement', [MaireLotissementController::class,'index'])->name('lotissement');
+        Route::post('lotissements', [MaireLotissementController::class, 'store'])->name('store');
+
     });
     Route::middleware(['role:proprietaire'])->group(function () {
         Route::resource('/proprietaire', ProprietaireController::class);

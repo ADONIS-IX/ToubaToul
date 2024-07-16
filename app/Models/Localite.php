@@ -10,6 +10,13 @@ class Localite extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'nom',
+        'population',
+        'superficie',
+
+    ];
+
     public function lotissements(): HasMany
     {
         return $this->hasMany(Lotissement::class);

@@ -118,24 +118,35 @@ https://templatemo.com/tm-581-kind-heart-charity
                         <div id="hero-slide" class="carousel carousel-fade slide" data-bs-ride="carousel">
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
-                                    <img src="home/images/slide/a (3).jpg"
+                                    <img src="home/images/slide/b.jpg"
                                         class="carousel-image img-fluid" alt="...">
 
                                     <div class="carousel-caption d-flex flex-column justify-content-end">
                                         <h1>Parcelles</h1>
 
-                                        <p>des services efficaces pour une bonne gestion des habitats</p>
+                                        <p>Des services efficaces pour une bonne gestion des habitats</p>
                                     </div>
                                 </div>
 
                                 <div class="carousel-item">
-                                    <img src="home/images/slide/a.jpg"
+                                    <img src="home/images/slide/d.jpg"
+                                        class="carousel-image img-fluid" alt="...">
+
+                                    <div class="carousel-caption d-flex flex-column justify-content-end">
+                                        <h1>Demande</h1>
+
+                                        <p>Des services rigoureux dans le traitement de vos demandes </p>
+                                    </div>
+                                </div>
+
+                                <div class="carousel-item">
+                                    <img src="home/images/slide/f.jpg"
                                         class="carousel-image img-fluid" alt="...">
 
                                     <div class="carousel-caption d-flex flex-column justify-content-end">
                                         <h1>Construction</h1>
 
-                                        <p>rapidite,efficacite,disponiblite</p>
+                                        <p>Rapidite,Efficacite,Disponiblite</p>
                                     </div>
                                 </div>
 
@@ -240,14 +251,16 @@ https://templatemo.com/tm-581-kind-heart-charity
 
                     <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
                         <div class="custom-block-wrap">
-                            <img src="home/images/causes/a (3).jpg"
+                            <img src="home/images/causes/c.jpg"
                                 class="custom-block-image img-fluid" alt="">
 
                             <div class="custom-block">
                                 <div class="custom-block-body">
                                     <h5 class="mb-3">Gestion des parcelles</h5>
 
-                                    <p></p>
+                                    <p>La gestion des parcelles est cruciale pour assurer une gestion foncière durable et équitable.
+                                         L'amélioration des systèmes de gestion administratifs sont essentielles
+                                          pour répondre aux défis croissants posés par l'urbanisation.</p>
 
                                     <div class="progress mt-4">
                                         <div class="progress-bar w-100" role="progressbar" aria-valuenow="100"
@@ -261,14 +274,15 @@ https://templatemo.com/tm-581-kind-heart-charity
 
                     <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
                         <div class="custom-block-wrap">
-                            <img src="home/images/causes/c (2).jpg"
+                            <img src="home/images/causes/co.AVIF"
                                 class="custom-block-image img-fluid" alt="">
 
                             <div class="custom-block">
                                 <div class="custom-block-body">
                                     <h5 class="mb-3">Gestion des demandes permis de construction</h5>
 
-                                    <p></p>
+                                    <p>La gestion des demandes de permis de construction est un processus administratif crucial
+                                         pour assurer un développement urbain ordonné et conforme aux réglementations en vigueur. </p>
 
                                     <div class="progress mt-4">
                                         <div class="progress-bar w-100" role="progressbar" aria-valuenow="100"
@@ -288,7 +302,9 @@ https://templatemo.com/tm-581-kind-heart-charity
                                 <div class="custom-block-body">
                                     <h5 class="mb-3">Gestion des demandes d'extrait de plan</h5>
 
-                                    <p></p>
+                                    <p>La gestion des demandes d'extrait de plan est un processus administratif crucial
+                                         pour obtenir des documents cartographiques officiels nécessaires à diverses fins,
+                                          telles que la gestion foncière et l'aménagement urbain.</p>
 
                                     <div class="progress mt-4">
                                         <div class="progress-bar w-100" role="progressbar" aria-valuenow="100"
@@ -296,6 +312,74 @@ https://templatemo.com/tm-581-kind-heart-charity
                                     </div>
                                 </div>
 
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
+                        <div class="custom-block-wrap">
+                            <img src="home/images/causes/te.JPG"
+                                class="custom-block-image img-fluid" alt="">
+
+                            <div class="custom-block">
+                                <div class="custom-block-body">
+                                    <h5 class="mb-3">Gestion des demandes de Terrain</h5>
+
+                                    <p>La gestion des demandes de terrain est un processus encadré par des règles administratives
+                                        et légales destinées à assurer une utilisation équitable et durable des terres.
+                                        Elle est principalement régie par le Code du Domaine de l'État et le Code de l'Urbanisme.</p>
+
+                                    <div class="progress mt-4">
+                                        <div class="progress-bar w-100" role="progressbar" aria-valuenow="100"
+                                            aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
+                        <div class="custom-block-wrap">
+                            <img src="home/images/causes/ba.JPG"
+                                class="custom-block-image img-fluid" alt="">
+
+                            <div class="custom-block">
+                                <div class="custom-block-body">
+                                    <h5 class="mb-3">Gestion des demandes de Mutation</h5>
+
+                                    <p>La gestion des demandes de mutation concerne le processus de transfert de propriété
+                                         d’un bien immobilier d’une personne à une autre. Ce processus est encadré par des
+                                          règles légales strictes pour garantir la sécurité juridique des transactions
+                                           et protéger les droits des parties impliquées.</p>
+
+                                    <div class="progress mt-4">
+                                        <div class="progress-bar w-100" role="progressbar" aria-valuenow="100"
+                                            aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
+                        <div class="custom-block-wrap">
+                            <img src="home/images/causes/mu.JPG"
+                                class="custom-block-image img-fluid" alt="">
+
+                            <div class="custom-block">
+                                <div class="custom-block-body">
+                                    <h5 class="mb-3">Gestion des demandes de Bail</h5>
+
+                                    <p>La gestion des demandes de bail concerne l’attribution et la gestion des droits d'utilisation
+                                         de terres ou de biens immobiliers appartenant à l'État ou à des particuliers
+                                         pour une durée déterminée, souvent longue, moyennant un loyer.</p>
+
+                                    <div class="progress mt-4">
+                                        <div class="progress-bar w-100" role="progressbar" aria-valuenow="100"
+                                            aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

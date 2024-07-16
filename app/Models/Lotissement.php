@@ -11,6 +11,14 @@ class Lotissement extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'localite_id',
+        'titre',
+        'slug',
+        'plan_lotissement',
+        'plan_urbanisme_directeur',
+    ];
+
     public function parcelles(): HasMany
     {
         return $this->hasMany(Parcelle::class);
