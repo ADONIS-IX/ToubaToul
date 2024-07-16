@@ -31,6 +31,7 @@ class UpdateDomanialeDossierRequest extends FormRequest
             'droit_propriete' => 'required|array',
             'droit_propriete.*' => 'exists:droit_proprietes,id',
             'plan_lotissement' => 'required|file|mimes:pdf,jpg,jpeg,png|max:10240',
+            'notification' => 'required|file|mimes:pdf,jpg,jpeg,png|max:2048',
         ]);
     }
 
@@ -62,6 +63,10 @@ class UpdateDomanialeDossierRequest extends FormRequest
             'plan_lotissement.file' => 'Le plan de lotissement doit être un fichier.',
             'plan_lotissement.mimes' => 'Le plan de lotissement doit être un fichier PDF, JPG, JPEG ou PNG.',
             'plan_lotissement.max' => 'Le plan de lotissement ne doit pas dépasser 10 Mo.',
+            'notification.required' => 'La notification d\'attribution est requis.',
+            'notification.file' => 'La notification d\'attribution doit être un fichier.',
+            'notification.mimes' => 'La notification d\'attribution doit être un fichier PDF, JPG, JPEG ou PNG.',
+            'notification.max' => 'La notification d\'attribution ne doit pas dépasser 2 Mo.'
         ];
     }
 }

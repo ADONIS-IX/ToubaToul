@@ -16,7 +16,7 @@ class LotissementSeeder extends Seeder
     {
         $localites = Localite::all();
 
-        Lotissement::factory(3)
+        Lotissement::factory(6)
         ->sequence(fn () => [
             'localite_id' => $localites->random(),
             ])

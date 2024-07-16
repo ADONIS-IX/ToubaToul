@@ -10,6 +10,17 @@ class ChefLocalite extends Model
 {
     use HasFactory;
 
+    //protected $guarded = ['id', 'created_at', 'updated_at'];
+
+    protected $fillable = [
+        'prenom',
+        'nom',
+        'numero_cni',
+        'email',
+        'telephone',
+        'photo_cni',
+    ];
+
     public function localite(): BelongsTo
     {
         return $this->belongsTo(Localite::class);

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\CadastraleInstructionController;
 use App\Http\Controllers\DomanialeInstructionController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LotController;
@@ -52,6 +53,7 @@ Route::middleware(['auth'])->group(function () {
     });
     Route::middleware(['role:agent_cadastrale'])->group(function () {
         Route::resource('/agent/cadastrale', AgentCadastraleController::class);
+        Route::resource('/cadastrale/instruction', CadastraleInstructionController::class)->names('cadastrale.instruction');
     });
     Route::middleware(['role:agent_impots_domaines'])->group(function () {
         Route::resource('/agent/impots-domaines', AgentImpotsDomainesController::class);

@@ -1,10 +1,10 @@
-<x-layout>
+<x-layout title="Vue Dossier">
     {{-- Nav-side --}}
     <nav class="fixed top-30 h-screen left-0 w-64 bg-emerald-900 text-white p-4 space-y-4">
         <h2 class="text-xl font-bold mb-4">Navigation</h2>
         <ul class="space-y-2">
             <li>
-                <a href="{{ route('domaniale.index') }}" class="flex items-center px-4 py-2 rounded transition duration-300  hover:bg-emerald-300">
+                <a href="{{ route('hygiene.index') }}" class="flex items-center px-4 py-2 rounded transition duration-300  hover:bg-emerald-300">
                     <i class="fas fa-tachometer-alt mr-2"></i> Tableau de Bord
                 </a>
             </li>
@@ -19,8 +19,8 @@
                 </a>
             </li>
             <li>
-                <a href="{{ route('domaniale.instruction.index') }}" class="flex items-center px-4 py-2 rounded transition duration-300 bg-yellow-500">
-                    <i class="fas fa-file-alt mr-2"></i> Instructions dossiers
+                <a href="#" class="flex items-center px-4 py-2 rounded transition duration-300 hover:bg-yellow-500">
+                    <i class="fas fa-folder-open mr-2"></i> Procédures
                 </a>
             </li>
             <li>
@@ -110,7 +110,7 @@
                         </div>
                         <div class="mt-4 max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
                             <h2 class="text-2xl font-bold mb-6 text-gray-800">Instruction Dossier</h2>
-                            <form action="{{ route('domaniale.instruction.store', $dossier->id )}}" method="POST" x-data="{ avis: '' }">
+                            <form action="{{ route('hygiene.store', $dossier->id )}}" method="POST" x-data="{ avis: '' }">
                                 @csrf
                                 <input type="hidden" name="dossier_id" value="{{ $dossier->id }}">
                                 <div class="flex flex-col space-y-4">
@@ -121,13 +121,19 @@
                                                 <option value="{{ $option->value }}">{{ $option->value }}</option>
                                             @endforeach
                                         </select>
+                                        @error('avis')
+                                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                                        @enderror
                                     </div>
 
                                     <div x-cloak x-show="avis === 'Reserve'" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 transform -translate-y-4" x-transition:enter-end="opacity-100 transform translate-y-0">
                                         <input class="w-full h-12 bg-slate-50 rounded-lg px-5 text-slate-900 border focus:outline focus:outline-2 focus:outline-emerald-500" type="text" name="observation" placeholder="Quelque remarque à ajouter ? 🚩" autocomplete="off">
+                                        @error('observation')
+                                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                                        @enderror
                                     </div>
 
-                                    <div x-show="avis !== ''" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 transform -translate-y-4" x-transition:enter-end="opacity-100 transform translate-y-0">
+                                    <div  x-cloak x-show="avis !== ''" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 transform -translate-y-4" x-transition:enter-end="opacity-100 transform translate-y-0">
                                         <button type="submit" class="w-full h-12 flex justify-center items-center bg-emerald-700 rounded-lg text-indigo-50 hover:bg-emerald-600 transition duration-300">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mr-2">
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
@@ -147,7 +153,7 @@
                                                 <h2 class="font-bold text-slate-900 text-lg">{{ $observation->user->prenom }} {{ $observation->user->nom }}</h2>
                                                 <time class="mt-2 sm:mt-0 sm:ml-4 text-xs text-slate-400" datetime="{{ $observation->created_at }}">@datetime($observation->created_at)</time>
                                             </div>
-                                            <p class="mt-4 text-slate-500 sm:leading-loose">{{ $observation->avis }}</p>
+                                            <p class="mt-4 text-slate-500 rounded-full bg-slate-200 fkex inline-flex sm:leading-loose">{{ $observation->avis }}</p>
                                             <p class="mt-4 text-slate-500 sm:leading-loose">{{ $observation->content }}</p>
                                         </div>
                                     </div>

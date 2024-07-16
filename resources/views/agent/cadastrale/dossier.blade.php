@@ -4,7 +4,7 @@
         <h2 class="text-xl font-bold mb-4">Navigation</h2>
         <ul class="space-y-2">
             <li>
-                <a href="{{ route('domaniale.index') }}" class="flex items-center px-4 py-2 rounded transition duration-300  hover:bg-emerald-300">
+                <a href="{{ route('cadastrale.index') }}" class="flex items-center px-4 py-2 rounded transition duration-300  hover:bg-emerald-300">
                     <i class="fas fa-tachometer-alt mr-2"></i> Tableau de Bord
                 </a>
             </li>
@@ -19,7 +19,12 @@
                 </a>
             </li>
             <li>
-                <a href="{{ route('domaniale.instruction.index') }}" class="flex items-center px-4 py-2 rounded transition duration-300 hover:bg-yellow-500">
+                <a href="#" class="flex items-center px-4 py-2 rounded transition duration-300 hover:bg-yellow-500">
+                    <i class="fas fa-folder-open mr-2"></i> Procédures
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('cadastrale.instruction.index') }}" class="flex items-center px-4 py-2 rounded transition duration-300 hover:bg-yellow-500">
                     <i class="fas fa-file-alt mr-2"></i> Instructions dossiers
                 </a>
             </li>
@@ -100,8 +105,8 @@
         </div>
 
         <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-            <div class="container bg-gradient-to-r from-emerald-100 to-lime-100 py-12 px-4 sm:px-6 lg:px-8">
-                <form action="{{ route('domaniale.update', $dossier->id) }}" method="POST" enctype="multipart/form-data">
+            <div x-cloak class="container bg-gradient-to-r from-emerald-100 to-lime-100 py-12 px-4 sm:px-6 lg:px-8" x-data="{ dossierType: '{{ $dossier->type }}' }">
+                <form action="{{ route('cadastrale.update', $dossier->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PATCH')
 
@@ -116,99 +121,20 @@
                         </select>
                     </div>
 
-                    <h3 class="text-xl font-bold mb-2">Nouvelle Parcelle</h3>
-
-                    <div class="mb-4">
-                        <label for="numeroLot" class="block mb-2">Numéro de Lot</label>
-                        <input type="text" value="{{ old('numeroLot', $dossier->parcelle->numeroLot ?? '') }}" name="numeroLot" id="numeroLot"  class="w-full p-2 border rounded">
-                        @error('numeroLot')
+                    <div x-show="dossierType === 'Extrait plan cadastrale'" class="mb-4">
+                        <label for="extrait_plan" class="block mb-2">Extrait de Plan</label>
+                        <input type="file" name="extrait_plan" id="extrait_plan" class="w-full p-2 border rounded bg-white">
+                        @error('extrait_plan')
                             <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
                         @enderror
                     </div>
 
-                    <div class="mb-4">
-                        <label for="superficie" class="block mb-2">Superficie</label>
-                        <input type="number" step="0.01" name="superficie" id="superficie" value="{{ old('superficie', $dossier->parcelle->superficie ?? '') }}" class="w-full p-2 border rounded" >
-                        @error('superficie')
+                    <div x-show="dossierType === 'Bail'" class="mb-4">
+                        <label for="titre_bail" class="block mb-2">Titre de Bail</label>
+                        <input type="file" name="titre_bail" id="titre_bail" class="w-full p-2 border rounded bg-white">
+                        @error('titre_bail')
                             <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
                         @enderror
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="coordonne_x" class="block mb-2">Coordonnée X</label>
-                        <input type="number" step="0.000001" name="coordonne_x" id="coordonne_x" value="{{ old('coordonne_x', $dossier->parcelle->coordonne_x ?? '') }}" class="w-full p-2 border rounded" >
-                        @error('coordonne_x')
-                            <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="coordonne_y" class="block mb-2">Coordonnée Y</label>
-                        <input type="number" step="0.000001" name="coordonne_y" id="coordonne_y" value="{{ old('coordonne_y', $dossier->parcelle->coordonne_y ?? '') }}" class="w-full p-2 border rounded" >
-                        @error('coordonne_y')
-                            <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="lotissement_id" class="block mb-2">Lotissement</label>
-                        <select name="lotissement_id" id="lotissement_id" class="w-full p-2 border rounded" >
-                            @foreach($lotissements as $lotissement)
-                                <option value="{{ $lotissement->id }}">{{ $lotissement->titre }}</option>
-                            @endforeach
-                        </select>
-                        @error('lotissement_id')
-                            <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="statut_parcelle_id" class="block mb-2">Statut de la Parcelle</label>
-                        <select name="statut_parcelle_id" id="statut_parcelle_id" class="w-full p-2 border rounded" >
-                            @foreach($status as $statut)
-                                <option value="{{ $statut->id }}">{{ $statut->titre }}</option>
-                            @endforeach
-                        </select>
-                        @error('statut_parcelle_id')
-                            <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="droit_propriete" class="block mb-2">Droits de Propriété</label>
-                        <select name="droit_propriete[]" id="droit_propriete" class="w-full p-2 border rounded" multiple >
-                            @foreach($droitsPropriete as $droit)
-                                <option value="{{ $droit->id }}"  {{ (collect(old('droit_propriete'))->contains($droit->id)) ? 'selected' : '' }}>{{ $droit->type }}</option>
-                            @endforeach
-                        </select>
-                        @error('droit_propriete')
-                            <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="plan_lotissement" class="block mb-2">Plan de lotissement</label>
-                         <input type="file" name="plan_lotissement" id="plan_lotissement" class="w-full p-2 border rounded bg-white" >
-                        @error('plan_lotissement')
-                            <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="notification" class="block mb-2">Notification d'attribution</label>
-                         <input type="file" name="notification" id="notification" class="w-full p-2 border rounded bg-white" >
-                        @error('notification')
-                            <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <div class="mb-4" x-data="{
-                        currentRole: '{{ $dossier->user->role }}',
-                        showRoleSelection: {{ $dossier->user->role === \App\Enums\Role::Depositaire ? 'true' : 'false' }}
-                    }">
-                        <div x-show="!showRoleSelection">
-                            <p>Rôle actuel du requérant : {{ $dossier->user->role }}</p>
-                        </div>
                     </div>
 
                     @if ($errors->any())
@@ -221,11 +147,12 @@
                     </div>
                     @endif
 
-                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Mettre à jour et Créer la Parcelle</button>
+                    <button type="submit" class="bg-emerald-500 text-white px-4 py-2 rounded">Mettre à jour</button>
                 </form>
             </div>
         </div>
 
     </main>
+
 
 </x-layout>

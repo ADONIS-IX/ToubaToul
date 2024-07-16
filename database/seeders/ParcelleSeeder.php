@@ -21,7 +21,7 @@ class ParcelleSeeder extends Seeder
         $lotissements = Lotissement::all();
         $users = User::all();
 
-        Parcelle::factory(50)
+        Parcelle::factory(100)
         ->sequence(fn () => [
             'statut_parcelle_id' => $statuts->random(),
             'lotissement_id' => $lotissements->random(),

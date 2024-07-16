@@ -13,6 +13,6 @@ class LocaliteSeeder extends Seeder
      */
     public function run(): void
     {
-        Localite::factory(3)->create();
+        Localite::factory(6)->create();
     }
 }

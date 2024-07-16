@@ -18,7 +18,7 @@ class DossierSeeder extends Seeder
         $users = User::all();
         $parcelles = Parcelle::all();
 
-        Dossier::factory(30)
+        Dossier::factory(180)
         ->sequence(fn () => [
             'parcelle_id' => $parcelles->random(),
             'user_id' => $users->random(),

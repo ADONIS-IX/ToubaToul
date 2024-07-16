@@ -4,7 +4,7 @@
         <h2 class="text-xl font-bold mb-4">Navigation</h2>
         <ul class="space-y-2">
             <li>
-                <a href="{{ route('domaniale.index') }}" class="flex items-center px-4 py-2 rounded transition duration-300  hover:bg-emerald-300">
+                <a href="{{ route('cadastrale.index') }}" class="flex items-center px-4 py-2 rounded transition duration-300  hover:bg-emerald-300">
                     <i class="fas fa-tachometer-alt mr-2"></i> Tableau de Bord
                 </a>
             </li>
@@ -19,7 +19,12 @@
                 </a>
             </li>
             <li>
-                <a href="{{ route('domaniale.instruction.index') }}" class="flex items-center px-4 py-2 rounded transition duration-300 hover:bg-yellow-500">
+                <a href="#" class="flex items-center px-4 py-2 rounded transition duration-300 hover:bg-yellow-500">
+                    <i class="fas fa-folder-open mr-2"></i> Procédures
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('cadastrale.instruction.index') }}" class="flex items-center px-4 py-2 rounded transition duration-300 hover:bg-yellow-500">
                     <i class="fas fa-file-alt mr-2"></i> Instructions dossiers
                 </a>
             </li>
@@ -85,8 +90,53 @@
                     </div>
                 </div>
 
+                <!-- Informations du parcelle -->
+                <div class="p-6 py-4 bg-gray-50 border-t border-b">
+                    <h2 class="text-2xl font-semibold mb-4">Informations du parcelle</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <p class="text-gray-600">Numero lot</p>
+                            <p class="font-medium">{{ $dossier->parcelle->numeroLot }}</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-600">Superficie</p>
+                            <p class="font-medium">{{ $dossier->parcelle->superficie }}</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-600">Titre Lotissement</p>
+                            <p class="font-medium">{{ $dossier->parcelle->lotissement->titre }}</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-600">Localité</p>
+                            <p class="font-medium">{{ $dossier->parcelle->lotissement->localite->nom }}</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-600">Droit de propriete</p>
+                            @foreach ($dossier->parcelle->droitProprietes as $droitPropriete)
+                                <p class="font-medium">{{ $droitPropriete->type }}</p>
+                            @endforeach
+                        </div>
+                        <div>
+                            <p class="text-gray-600">Statut parcelle</p>
+                            <p class="font-medium">{{ $dossier->parcelle->statutParcelle->titre }}</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-600">Chef de la localité</p>
+                            @foreach ($dossier->parcelle->lotissement->localite->chefLocalites as $chefLocalite )
+                                <p class="font-medium">{{ $chefLocalite->prenom }} {{ $chefLocalite->nom }}</p>
+                            @endforeach
+                        </div>
+                        <div>
+                            <p class="text-gray-600">Contact chef de localité</p>
+                            @foreach ($dossier->parcelle->lotissement->localite->chefLocalites as $chefLocalite )
+                            <p class="font-medium">telephone: {{ $chefLocalite->telephone }}</p>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Documents joints -->
-                <div class="px-6 py-4 bg-gray-50 border-t border-b">
+                <div class="px-6">
                     <h3 class="text-xl font-semibold mb-3">Documents joints</h3>
                     <ul class="list-disc list-inside">
                         @forelse($dossier->pieceDossier as $piece)
@@ -96,6 +146,7 @@
                         @endforelse
                     </ul>
                 </div>
+
             </div>
         </div>
     </main>

@@ -8,61 +8,108 @@ use App\Enums\Role;
 use App\Enums\TypeDossier;
 use App\Http\Controllers\Controller;
 use App\Models\Dossier;
+use App\Models\Observation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class AgentHygieneController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(Request $request): View
     {
-        $dossiers = Dossier::with(['parcelle.lotissement.localite', 'user'])
-        ->whereIn('type', [TypeDossier::Construction])
+        $status = $request->query('status', 'en_attente');
+        $search = $request->query('search');
+
+        $query = Dossier::with(['user', 'parcelle.lotissement.localite', 'parcelle', 'observations', 'observations.user'])
+            ->where('type', TypeDossier::Construction);
+
+        switch ($status) {
+            case 'en_attente':
+                $query->whereDoesntHave('observations', function ($q) {
+                    $q->whereHas('user', function ($u) {
+                        $u->where('role', Role::Agent_Hygiene);
+                    });
+                })->where('statut', EtatDossier::En_attente);
+                break;
+                case 'favorable':
+                    $query->whereHas('observations', function ($q) {
+                        $q->where('avis', Avis::Favorable)
+                            ->whereHas('user', function ($u) {
+                                $u->where('role', Role::Agent_Hygiene);
+                            });
+                    });
+                    break;
+                case 'reserve':
+                    $query->whereHas('observations', function ($q) {
+                        $q->where('avis', Avis::Reserve)
+                            ->whereHas('user', function ($u) {
+                                $u->where('role', Role::Agent_Hygiene);
+                            });
+                    });
+                    break;
+                case 'all':
+                    $query->whereHas('observations', function ($q) {
+                        $q->whereHas('user', function ($u) {
+                            $u->where('role', Role::Agent_Hygiene);
+                        });
+                    });
+                    break;
+        }
+
+        if ($search) {
+            $query->where(function($q) use ($search) {
+                $q->where('id', 'like', "%{$search}%")
+                ->orWhereHas('user', function($q) use ($search) {
+                    $q->where('nom', 'like', "%{$search}%")
+                        ->orWhere('prenom', 'like', "%{$search}%");
+                })
+                ->orWhereHas('parcelle.lotissement.localite', function ($l) use ($search) {
+                    $l->where('nom', 'like', "%{$search}%");
+                });
+            });
+        }
+
+        $dossiers = $query->oldest()->paginate(10);
+
+        $totalAttente = Dossier::where('type', TypeDossier::Construction)
         ->where('statut', EtatDossier::En_attente)
-        ->whereDoesntHave('observations.user', function ($query) {
-            $query->where('role', Role::Agent_Hygiene);
-            })
-        ->oldest()
-        ->paginate(10);
-
-        $totalDossiers = Dossier::whereIn('type', [TypeDossier::Construction])
-        ->whereIn('statut', EtatDossier::cases())
-        ->whereHas('observations.user', function ($query) {
-            $query->where('role', Role::Agent_Hygiene);})->count();
-
-        /**
-         * (ici pour recuperer uniquement le total des dossier Approuve)
-        *$totalDossiers = Dossier::whereIn('type', [TypeDossier::Construction])
-        *->where('statut', EtatDossier::Approuve)
-        *->whereHas('observations.user', function ($query) {
-        *    $query->where('role', Role::Agent_Hygiene);})->count();
-        */
-
-        $totalApprouve = Dossier::whereIn('type', [TypeDossier::Construction])
-        ->whereIn('statut', [EtatDossier::En_attente, EtatDossier::Approuve])
-        ->whereHas('observations', function ($query) {
-            $query->whereHas('user', function ($query) {
-                $query->where('role', Role::Agent_Hygiene);
-            })->where('avis', Avis::Favorable);
+        ->whereDoesntHave('observations', function ($q) {
+            $q->whereHas('user', function ($u) {
+                $u->where('role', Role::Agent_Hygiene);
+            });
         })->count();
 
-        $totalRefuse = Dossier::whereIn('type', [TypeDossier::Construction])
-        ->where('statut', EtatDossier::En_attente)
-        ->whereHas('observations', function ($query) {
-            $query->whereHas('user', function ($query) {
-                $query->where('role', Role::Agent_Hygiene);
-            })->where('avis', Avis::Reserve);
+        $totalFavorable = Dossier::where('type', TypeDossier::Construction)
+        ->whereHas('observations', function ($q) {
+            $q->where('avis', Avis::Favorable)
+                ->whereHas('user', function ($u) {
+                    $u->where('role', Role::Agent_Hygiene);
+                });
         })->count();
 
-        $totalAttente = $dossiers->total();
+    $totalReserve = Dossier::where('type', TypeDossier::Construction)
+        ->whereHas('observations', function ($q) {
+            $q->where('avis', Avis::Reserve)
+                ->whereHas('user', function ($u) {
+                    $u->where('role', Role::Agent_Hygiene);
+                });
+        })->count();
+
+    $totalDossiers = Dossier::where('type', TypeDossier::Construction)
+        ->whereHas('observations', function ($q) {
+            $q->whereHas('user', function ($u) {
+                $u->where('role', Role::Agent_Hygiene);
+            });
+        })->count();
 
         return view('agent.hygiene.index', [
             'dossiers' => $dossiers,
             'totalDossiers' => $totalDossiers,
-            'totalApprouve' => $totalApprouve,
-            'totalRefuse' => $totalRefuse,
+            'totalFavorable' => $totalFavorable,
+            'totalReserve' => $totalReserve,
             'totalAttente' => $totalAttente,
+            'currentStatus' => $status,
+            'search' => $search,
         ]);
     }
 
@@ -79,7 +126,26 @@ class AgentHygieneController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Récupérer l'ID du dossier depuis la requête
+        $id = $request->input('dossier_id');
+
+        // Valider les données du formulaire
+        $validatedData = $request->validate([
+            'avis' => 'required|in:' . implode(',', array_column(Avis::cases(), 'value')),
+            'observation' => 'required_if:avis,Reserve|nullable|string|max:255',
+            ]);
+
+            $dossier = Dossier::findOrFail($id);
+
+            $observation = new Observation();
+            $observation->avis = $validatedData['avis'];
+            $observation->content = $validatedData['observation'] ?? null;
+            $observation->dossier_id = $dossier->id;
+            $observation->agent_id = Auth::id();
+            $observation->save();
+
+            return redirect()->route('domaniale.instruction.show', $dossier->id)
+            ->withStatus('Observation soumise avec succès.');
     }
 
     /**
@@ -87,7 +153,11 @@ class AgentHygieneController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $dossier = Dossier::with('pieceDossier', 'observations', 'parcelle.lotissement.localite','parcelle')->findOrFail($id);
+
+        $avis = Avis::cases();
+
+        return view('agent.hygiene.show', compact('dossier', 'avis'));
     }
 
     /**
