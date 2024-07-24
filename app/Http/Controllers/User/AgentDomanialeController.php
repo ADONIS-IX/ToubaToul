@@ -168,21 +168,19 @@ class AgentDomanialeController extends Controller
             $dossier->user->update(['role' => Role::Proprietaire]);
         }
 
-        /*
-        // Rechercher le DroitPropriete de type Attribution
-        $droitAttribution = DroitPropriete::where('type', 'Attribution')
-        ->orWhere('slug', 'attribution')
-        ->first();
+        $dossier->save();
 
-        // Synchroniser la parcelle avec le droit de propriété Bail
-        $dossier->parcelle->droitProprietes()->syncWithoutDetaching([$droitAttribution->id]);
-         */
-
-    } else {
+    } elseif ($validated['statut'] === EtatDossier::Refuse->value) {
         // Mise à jour du statut uniquement si le dossier est refusé
         $dossier->update([
             'statut' => $validated['statut'],
         ]);
+
+        $dossier->save();
+
+    } else {
+        // Ne rien faire si le statut n'est ni Approuve ni Refuse
+        return redirect()->route('domaniale.index')->withStatus('Le statut du dossier n\'a pas été modifié.');
     }
 
     // Associer l'agent au dossier
@@ -199,3 +197,4 @@ class AgentDomanialeController extends Controller
         //
     }
 }
+

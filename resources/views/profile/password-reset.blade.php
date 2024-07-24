@@ -30,7 +30,7 @@
                     </div>
                 </div>
                 <div class="mt-6 flex items-center justify-end gap-x-6">
-                    <button type="button" onclick="window.location.href='{{ route('proprietaire.index') }}'" class="rounded-md py-2 px-4 bg-slate-200 text-gray-900 shadow-md font-semibold hover:bg-slate-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 leading-6">Retour</button>
+                    <button type="button" onclick="window.history.back()" class="py-2 px-4 bg-red-200 text-gray-700 rounded-lg shadow-md font-semibold hover:bg-red-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50 leading-6">Retour</button>
                     <button type="submit" class="py-2 px-4 bg-emerald-500 text-white rounded-lg shadow-md font-semibold hover:bg-emerald-600 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-opacity-200">Modifier</button>
                 </div>
             </form>

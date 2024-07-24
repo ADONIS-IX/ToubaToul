@@ -1,10 +1,10 @@
 <x-layout title="Demande">
     {{-- Nav-side --}}
-    <nav class="fixed top-30 h-screen left-0 w-64 bg-emerald-900 text-white p-4 space-y-4">
+     <nav class="fixed top-30 left-0 h-full w-64 bg-emerald-900 text-white p-4 space-y-4">
         <h2 class="text-xl font-bold mb-4">Navigation</h2>
         <ul class="space-y-2">
             <li>
-                <a href="{{ route('maire.index') }}" class="flex items-center px-4 py-2 rounded transition duration-300  hover:bg-emerald-300">
+                <a href="{{ route('maire.index') }}" class="flex items-center px-4 py-2 rounded transition duration-300 hover:bg-emerald-300">
                     <i class="fas fa-tachometer-alt mr-2"></i> Tableau de Bord
                 </a>
             </li>
@@ -14,12 +14,12 @@
                 </a>
             </li>
             <li>
-                <a href="{{ route('parcelle')}}" class="flex items-center px-4 py-2 rounded transition duration-300 hover:bg-yellow-500">
+                <a href="{{ route('parcelle') }}" class="flex items-center px-4 py-2 rounded transition duration-300 hover:bg-yellow-500">
                     <i class="fas fa-tree mr-2"></i> Voir les parcelles
                 </a>
             </li>
             <li>
-                <a href="{{ route('demande')}}" class="flex items-center px-4 py-2 rounded transition duration-300 hover:bg-yellow-500">
+                <a href="{{ route('demande') }}" class="flex items-center px-4 py-2 rounded transition duration-300 hover:bg-yellow-500">
                     <i class="fas fa-folder-open mr-2"></i> Voir les demandes
                 </a>
             </li>
@@ -28,13 +28,18 @@
                     <i class="fas fa-map-marker-alt mr-2"></i> Ajouter une Localite
                 </a>
             </li>
+             <li>
+                <a href="{{ route('localite') }}" class="flex items-center px-4 py-2 rounded transition duration-300 hover:bg-yellow-500">
+                    <i class="fas fa-map-marker-alt mr-2"></i> Ajouter un Chef de Localite
+                </a>
+            </li>
             <li>
-                <a href="#" class="flex items-center px-4 py-2 rounded transition duration-300 hover:bg-yellow-500">
+                <a href="{{ route('lotissement') }}" class="flex items-center px-4 py-2 rounded transition duration-300 hover:bg-yellow-500">
                     <i class="fas fa-map mr-2"></i> Creer un Lotissement
                 </a>
             </li>
             <li>
-                <a href="#" class="flex items-center px-4 py-2 rounded transition duration-300 hover:bg-yellow-500">
+                <a href="{{ route('support') }}" class="flex items-center px-4 py-2 rounded transition duration-300 hover:bg-yellow-500">
                     <i class="fas fa-life-ring mr-2"></i> Support
                 </a>
             </li>
@@ -129,7 +134,6 @@
                             <th scope="col" class="py-3.5 px-3 uppercase font-semibold text-left text-sm">Adresse</th>
                             <th scope="col" class="py-3.5 px-3 uppercase font-semibold text-left text-sm">Statut</th>
                             <th scope="col" class="py-3.5 px-3 uppercase font-semibold text-left text-sm">Date de dépot</th>
-                            <th scope="col" class="py-3.5 px-3 uppercase font-semibold text-left text-sm"></th>
                             <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-3"></th>
                         </tr>
                     </thead>
@@ -143,7 +147,7 @@
                             <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">{{ $dossier->statut }}</td>
                             <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">@datetime($dossier->created_at)</td>
                             <td class="whitespace-nowrap py-4 px-3 text-sm">
-                                <a href="{{ route('maire.show', $dossier->id) }}" class="text-indigo-600 hover:text-emerald-400">Voir</a>
+                                <a href="{{ route('demandes.show', $dossier->id) }}" class="text-indigo-600 hover:text-emerald-400">Voir</a>
                             </td>
                         </tr>
                         @endforeach

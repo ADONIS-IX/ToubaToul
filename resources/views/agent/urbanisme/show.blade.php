@@ -18,14 +18,8 @@
                     <i class="fas fa-concierge-bell mr-2"></i> Mes Services
                 </a>
             </li>
-
             <li>
-                <a href="{{ route('cadastrale.instruction.index') }}" class="flex items-center px-4 py-2 rounded transition duration-300 hover:bg-yellow-500">
-                    <i class="fas fa-file-alt mr-2"></i> Instructions dossiers
-                </a>
-            </li>
-            <li>
-                <a href="#" class="flex items-center px-4 py-2 rounded transition duration-300 hover:bg-yellow-500">
+                <a href="{{ route('support') }}" class="flex items-center px-4 py-2 rounded transition duration-300 hover:bg-yellow-500">
                     <i class="fas fa-life-ring mr-2"></i> Support
                 </a>
             </li>
@@ -49,7 +43,7 @@
 
                 <!-- Informations du requérant -->
                 <div class="p-6">
-                    <h2 class="text-2xl font-semibold mb-4">Informations du requérant</h2>
+                    <h2 class="text-2xl font-semibold mb-4 text-emerald-500">Informations du requérant</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                             <p class="text-gray-600">Nom complet</p>
@@ -88,7 +82,7 @@
 
                 <!-- Informations du parcelle -->
                 <div class="p-6 py-4 bg-gray-50 border-t border-b">
-                    <h2 class="text-2xl font-semibold mb-4">Informations du parcelle</h2>
+                    <h2 class="text-2xl font-semibold mb-4 text-emerald-500">Informations du parcelle</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                             <p class="text-gray-600">Numero lot</p>
@@ -133,7 +127,7 @@
 
                 <!-- Documents joints -->
                 <div class="px-6">
-                    <h3 class="text-xl font-semibold mb-3">Documents joints</h3>
+                    <h3 class="text-xl font-semibold mb-3 text-emerald-500">Documents joints</h3>
                     <ul class="list-disc list-inside">
                         @forelse($dossier->pieceDossier as $piece)
                         <li><a href="{{ asset('storage/' . $piece->nom) }}" target="_blanck" class="text-blue-500 hover:underline">{{ $piece->nom }}</a></li>
@@ -141,6 +135,27 @@
                             <p class="text-sm font-medium sm:pl-3 text-emerald-700">Aucune pièce pour ce dossier.</p>
                         @endforelse
                     </ul>
+                </div>
+
+                 <!-- Informations du parcelle -->
+                 <div class="p-6 py-4 bg-gray-50 border-t border-b">
+                    <h2 class="text-2xl font-semibold mb-4 text-emerald-500">Observations</h2>
+                        <div class="space-y-8">
+                            @foreach ($dossier->observations as $observation)
+                                <div class="flex bg-slate-50 p-6 rounded-lg">
+                                    <img class="w-10 h-10 sm:w-12 sm:h-12 object-cover rounded-full" src="{{ Gravatar::get($observation->user->email) }}" alt="image de profile de {{ $observation->user->prenom }} {{ $observation->user->nom }}">
+                                    <div class="ml-4 flex flex-col">
+                                        <div class="flex flex-col sm:flex-row sm:items-center">
+                                            <h2 class="font-bold text-slate-900 text-lg">{{ $observation->user->prenom }} {{ $observation->user->nom }}</h2>
+                                            <time class="mt-2 sm:mt-0 sm:ml-4 text-xs text-slate-400" datetime="{{ $observation->created_at }}">@datetime($observation->created_at)</time>
+                                        </div>
+                                        <p class="mt-4 text-slate-500 sm:leading-loose">{{ $observation->avis }}</p>
+                                        <p class="mt-4 text-slate-500 sm:leading-loose">{{ $observation->content }}</p>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
                 </div>
 
             </div>

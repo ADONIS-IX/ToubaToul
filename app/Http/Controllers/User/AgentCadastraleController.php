@@ -37,7 +37,7 @@ class AgentCadastraleController extends Controller
         });
     }
 
-    $dossiers = $query->oldest()->paginate(10);
+    $dossiers = $query->oldest()->paginate(20);
 
         $totalDossiers = Dossier::whereIn('type', [TypeDossier::Bail, TypeDossier::Extrait_plan_cadastrale])->count();
         $totalBails = Dossier::where('type', [TypeDossier::Bail])->count();
@@ -162,7 +162,6 @@ class AgentCadastraleController extends Controller
         }
 
         $dossier->save();
-
          // Associer l'agent au dossier
         $dossier->users()->syncWithoutDetaching([auth()->id()]);
 

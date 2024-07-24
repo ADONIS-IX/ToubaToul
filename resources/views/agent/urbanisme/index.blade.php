@@ -19,7 +19,7 @@
                 </a>
             </li>
             <li>
-                <a href="#" class="flex items-center px-4 py-2 rounded transition duration-300 hover:bg-yellow-600">
+                <a href="{{ route('support') }}" class="flex items-center px-4 py-2 rounded transition duration-300 hover:bg-yellow-600">
                     <i class="fas fa-life-ring mr-2"></i> Support
                 </a>
             </li>

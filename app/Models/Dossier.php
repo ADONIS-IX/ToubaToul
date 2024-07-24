@@ -41,5 +41,5 @@ class Dossier extends Model
 
     protected $table = 'dossiers';
 
-    protected $fillable = ['type', 'slug', 'user_id'];
+    protected $fillable = ['type','statut', 'slug', 'user_id'];
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\EtatParcelle;
 use App\Http\Controllers\Controller;
+use App\Models\Dossier;
 use App\Models\Parcelle;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -29,24 +30,21 @@ class MaireParcelleController extends Controller
                 $q->where('id', 'like', "%{$search}%")
                   ->orWhereHas('user', function($q) use ($search) {
                       $q->where('nom', 'like', "%{$search}%")
-                        ->orWhere('prenom', 'like', "%{$search}%")
-                        ->orWhere('adresse', 'like', "%{$search}%");
+                        ->orWhere('prenom', 'like', "%{$search}%");
                   });
             });
         }
 
-        $parcelles = $query->oldest()->paginate(100);
+        $parcelles = $query->paginate(100);
 
         // Calcul des totaux pour tous les types de dossiers
         $totalParcelles = Parcelle::count();
-        $totalConstruction = Parcelle::where('statut_parcelle_id', EtatParcelle::Libre->value)->count();
-        $totalLibre = Parcelle::where('statut_parcelle_id', EtatParcelle::Construction->value)->count();
+        $totalLibre = Parcelle::where('statut_parcelle_id', EtatParcelle::Libre->value)->count();
         $totalBatie = Parcelle::where('statut_parcelle_id', EtatParcelle::Batie->value)->count();
 
         return view('maire.parcelle', [
             'parcelles' => $parcelles,
             'totalParcelles' => $totalParcelles,
-            'totalConstruction' => $totalConstruction,
             'totalLibre' => $totalLibre,
             'totalBatie' => $totalBatie,
             'currentStatus' => $status,
@@ -54,6 +52,11 @@ class MaireParcelleController extends Controller
         ]);
     }
 
-
+    public function show(Dossier $dossier): View
+    {
+        return view('maire.showParcelle', [
+            'dossier' => $dossier
+        ]);
+    }
 
 }

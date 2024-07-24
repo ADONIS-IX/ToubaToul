@@ -416,8 +416,8 @@ https://templatemo.com/tm-581-kind-heart-charity
                     <p class="text-white d-flex mb-2">
                         <i class="bi-telephone me-2"></i>
 
-                        <a href="tel: 305-240-9671" class="site-footer-link">
-                            305-240-9671
+                        <a href="tel: (+221) 33 953 37 22" class="site-footer-link">
+                            (+221) 33 953 37 22
                         </a>
                     </p>
 
@@ -425,7 +425,7 @@ https://templatemo.com/tm-581-kind-heart-charity
                         <i class="bi-envelope me-2"></i>
 
                         <a href="waderane3@gmail.com" class="site-footer-link">
-                            S.domaniale@gmail.com
+                            communedetoubatoul@yahoo.fr
 
                         </a>
                     </p>
@@ -443,9 +443,9 @@ https://templatemo.com/tm-581-kind-heart-charity
                 <div class="row">
 
                     <div class="col-lg-6 col-md-7 col-12">
-                        <p class="copyright-text mb-0">Copyright © 2024 <a href="#">Terra+</a> Charity Org.
-                            Design: <a href="https://templatemo.com" target="_blank">TemplateMo</a><br>Distribution:
-                            <a href="https://themewagon.com">ThemeWagon</a>
+                        <p class="copyright-text mb-0">Copyright © 2024 <a href="#">Terraplus</a><br>
+                            Design: <a href="#">SATIC UADB</a><br>Distribution:
+                            <a href="#">D2A</a>
                         </p>
                     </div>
 

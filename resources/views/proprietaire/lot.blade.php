@@ -24,7 +24,7 @@
                 </a>
             </li>
             <li>
-                <a href="#" class="flex items-center px-4 py-2 rounded transition duration-300 hover:bg-gray-700">
+                <a href="{{ route('support') }}" class="flex items-center px-4 py-2 rounded transition duration-300 hover:bg-gray-700">
                     <i class="fas fa-life-ring mr-2"></i> Support
                 </a>
             </li>
@@ -53,25 +53,45 @@
                 </svg>
             </div>
 
+
+
+
+
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Répétez ce bloc pour chaque parcelle -->
+                @foreach($parcelles as $parcelle)
                 <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition duration-500 hover:scale-105">
                     <div class="bg-gradient-to-r from-emerald-500 to-blue-700 text-white py-4 px-6">
                         <h2 class="text-2xl font-semibold flex items-center"><i class="fas fa-map-marker-alt mr-2"></i>
-                            Parcelle #<span class="numeroLot ml-1">Lot-123</span>
+                            Parcelle #<span class="numeroLot ml-1">{{ $parcelle->numeroLot }}</span>
                         </h2>
                     </div>
                     <div class="p-6">
-                        <p class="mb-3 flex items-center"><i class="fas fa-city mr-3 text-emerald-500"></i><span class="font-medium">Localité:</span> <span class="localite ml-2">Ville A</span></p>
-                        <p class="mb-3 flex items-center"><i class="fas fa-ruler-combined mr-3 text-emerald-500"></i><span class="font-medium">Superficie:</span> <span class="superficie ml-2">500 m²</span></p>
-                        <p class="mb-3 flex items-center"><i class="fas fa-map-pin mr-3 text-emerald-500"></i><span class="font-medium">Coordonnées:</span> <span class="ml-2">X: <span class="coordX">45.6789</span>, Y: <span class="coordY">-12.3456</span></span></p>
-                        <p class="mb-3 flex items-center"><i class="fas fa-file-contract mr-3 text-emerald-500"></i><span class="font-medium">Droit de propriété:</span> <span class="droitPropriete ml-2">Pleine propriété</span></p>
-                        <p class="flex items-center"><i class="fas fa-info-circle mr-3 text-emerald-500"></i><span class="font-medium">Statut:</span><span class="statutParcelle ml-2 px-3 py-1 rounded-full text-sm font-semibold text-white bg-green-500">Libre</span></p>
+                        <p class="mb-3 flex items-center"><i class="fas fa-city mr-3 text-emerald-500"></i><span class="font-medium">Localité:</span> <span class="localite ml-2">{{ $parcelle->lotissement->localite->nom ?? 'Non spécifié' }}</span></p>
+                        <p class="mb-3 flex items-center"><i class="fas fa-ruler-combined mr-3 text-emerald-500"></i><span class="font-medium">Superficie:</span> <span class="superficie ml-2">{{ $parcelle->superficie }} m²</span></p>
+                        <p class="mb-3 flex items-center"><i class="fas fa-map-pin mr-3 text-emerald-500"></i><span class="font-medium">Coordonnées:</span> <span class="ml-2">X: <span class="coordX">{{ $parcelle->coordonne_x }}</span>, Y: <span class="coordY">{{ $parcelle->coordonne_y }}</span></span></p>
+                        <p class="mb-3 flex items-center"><i class="fas fa-file-contract mr-3 text-emerald-500"></i><span class="font-medium">Droit de propriété:</span>
+                            @foreach ($parcelle->droitProprietes as $droitPropriete)
+                            <li><span class="droitPropriete ml-2 px-3 py-1 bg-indigo-700 text-indigo-50">{{ $droitPropriete->type ?? 'Non spécifié' }}</span></p></li>
+                            {{-- <li><a href="" class="px-3 py-1 bg-indigo-700 text-indigo-50 rounded-full text-sm">{{ $droitPropriete->type }}</a></li> --}}
+                        @endforeach
+                        <p class="flex items-center"><i class="fas fa-info-circle mr-3 text-emerald-500"></i><span class="font-medium">Statut:</span>
+                            <span class="statutParcelle ml-2 px-3 py-1 rounded-full text-sm font-semibold text-white {{ $parcelle->statutParcelle->titre == 'Libre' ? 'bg-green-500' : 'bg-red-500' }}">
+                                {{ $parcelle->statutParcelle->titre }}
+                            </span>
+                        </p>
                     </div>
                 </div>
+                @endforeach
+            </div>
                 <!-- Fin du bloc de parcelle -->
 
-                <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-500 hover:scale-105">
+
+
+
+
+
+
+                {{-- <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-500 hover:scale-105">
                     <div class="p-4">
                         <h2 class="text-xl font-semibold mb-2">Parcelle B</h2>
                         <p class="text-gray-600 mb-2">Localité: Localite B</p>
@@ -103,7 +123,7 @@
                 </div>
 
             </div>
-        </div>
+        </div>--}}
 
     </main>
 </x-layout>

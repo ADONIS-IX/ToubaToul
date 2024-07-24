@@ -12,6 +12,7 @@ use App\Http\Controllers\MaireLotissementController;
 use App\Http\Controllers\MaireParcelleController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\SupportController;
 use App\Http\Controllers\User\AgentCadastraleController;
 use App\Http\Controllers\User\AgentDomanialeController;
 use App\Http\Controllers\User\AgentHygieneController;
@@ -42,6 +43,8 @@ Route::patch('/profil/password-update', [PasswordController::class, 'updatePassw
 
 Route::get('/lot', [LotController::class, 'index'])->name('lot');
 
+Route::get('/terraplus/support-technique', [SupportController::class, 'index'])->name('support');
+
 
 
 
@@ -70,7 +73,9 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['role:maire'])->group(function () {
         Route::resource('/maire', MaireController::class);
         Route::get('/mairie/demande', [MaireDemandeController::class,'index'])->name('demande');
+        Route::get('/mairie/demande/{dossier}', [MaireDemandeController::class,'show'])->name('demandes.show');
         Route::get('/mairie/parcelle', [MaireParcelleController::class,'index'])->name('parcelle');
+        Route::get('/mairie/parcelle/{dossier}', [MaireParcelleController::class, 'show'])->name('parcelles.show');
         Route::get('/mairie/localite', [MaireLocaliteController::class,'index'])->name('localite');
         Route::post('/localite', [MaireLocaliteController::class, 'store'])->name('store');
         Route::get('/mairie/lotissement', [MaireLotissementController::class,'index'])->name('lotissement');

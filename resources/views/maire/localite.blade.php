@@ -16,47 +16,52 @@
 </head>
 <body class="bg-gray-100">
     <x-layout title="Tableau de bord">
-        {{-- Navigation latérale --}}
-        <nav class="fixed top-30 left-0 h-full w-64 bg-emerald-900 text-white p-4 space-y-4">
-            <h2 class="text-xl font-bold mb-4">Navigation</h2>
-            <ul class="space-y-2">
-                <li>
-                    <a href="{{ route('maire.index') }}" class="flex items-center px-4 py-2 rounded transition duration-300 hover:bg-emerald-300">
-                        <i class="fas fa-tachometer-alt mr-2"></i> Tableau de Bord
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('profil') }}" class="flex items-center px-4 py-2 rounded transition duration-300 hover:bg-yellow-500">
-                        <i class="fas fa-user mr-2"></i> Mes Informations
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('parcelle') }}" class="flex items-center px-4 py-2 rounded transition duration-300 hover:bg-yellow-500">
-                        <i class="fas fa-tree mr-2"></i> Voir les parcelles
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('demande') }}" class="flex items-center px-4 py-2 rounded transition duration-300 hover:bg-yellow-500">
-                        <i class="fas fa-folder-open mr-2"></i> Voir les demandes
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('localite') }}" class="flex items-center px-4 py-2 rounded transition duration-300 hover:bg-yellow-500">
-                        <i class="fas fa-map-marker-alt mr-2"></i> Ajouter une Localite
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="flex items-center px-4 py-2 rounded transition duration-300 hover:bg-yellow-500">
-                        <i class="fas fa-map mr-2"></i> Créer un Lotissement
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="flex items-center px-4 py-2 rounded transition duration-300 hover:bg-yellow-500">
-                        <i class="fas fa-life-ring mr-2"></i> Support
-                    </a>
-                </li>
-            </ul>
-        </nav>
+        {{-- Nav-side --}}
+     <nav class="fixed top-30 left-0 h-full w-64 bg-emerald-900 text-white p-4 space-y-4">
+        <h2 class="text-xl font-bold mb-4">Navigation</h2>
+        <ul class="space-y-2">
+            <li>
+                <a href="{{ route('maire.index') }}" class="flex items-center px-4 py-2 rounded transition duration-300 hover:bg-emerald-300">
+                    <i class="fas fa-tachometer-alt mr-2"></i> Tableau de Bord
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('profil') }}" class="flex items-center px-4 py-2 rounded transition duration-300 hover:bg-yellow-500">
+                    <i class="fas fa-user mr-2"></i> Mes Informations
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('parcelle') }}" class="flex items-center px-4 py-2 rounded transition duration-300 hover:bg-yellow-500">
+                    <i class="fas fa-tree mr-2"></i> Voir les parcelles
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('demande') }}" class="flex items-center px-4 py-2 rounded transition duration-300 hover:bg-yellow-500">
+                    <i class="fas fa-folder-open mr-2"></i> Voir les demandes
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('localite') }}" class="flex items-center px-4 py-2 rounded transition duration-300 hover:bg-yellow-500">
+                    <i class="fas fa-map-marker-alt mr-2"></i> Ajouter une Localite
+                </a>
+            </li>
+             <li>
+                <a href="{{ route('localite') }}" class="flex items-center px-4 py-2 rounded transition duration-300 hover:bg-yellow-500">
+                    <i class="fas fa-map-marker-alt mr-2"></i> Ajouter un Chef de Localite
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('lotissement') }}" class="flex items-center px-4 py-2 rounded transition duration-300 hover:bg-yellow-500">
+                    <i class="fas fa-map mr-2"></i> Creer un Lotissement
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('support') }}" class="flex items-center px-4 py-2 rounded transition duration-300 hover:bg-yellow-500">
+                    <i class="fas fa-life-ring mr-2"></i> Support
+                </a>
+            </li>
+        </ul>
+    </nav>
 
         {{-- Contenu principal --}}
         <main class="ml-64 flex flex-col items-end justify-start min-h-screen px-6 sm:px-10 lg:px-20">

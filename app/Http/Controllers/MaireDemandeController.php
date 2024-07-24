@@ -78,11 +78,13 @@ class MaireDemandeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id): View
+    public function show(Dossier $dossier): View
     {
-        $dossier = Dossier::with('pieceDossier')->findOrFail($id);
+        //$dossier = Dossier::with('pieceDossier')->findOrFail($id);
 
-        return view('maire.show', compact('dossier'));
+        return view('maire.show', [
+            'dossier' => $dossier,
+        ]);
     }
 
     /**

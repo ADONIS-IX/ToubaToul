@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Profil Utilisateur</title>
+    <title>Terraplus | Profil Utilisateur</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.4/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
     <link rel="icon" href="{{ asset('2.ico') }}">
@@ -137,7 +137,7 @@
                 </div>
             </div>
             <div class="mt-6 flex items-center justify-end gap-x-6" x-data="{ open: false }">
-                <button type= "button" @click="window.location.href='{{ route('proprietaire.index') }}'" class="rounded-md py-2 px-4 bg-slate-200 text-gray-900 shadow-md font-semibold  hover:bg-gray-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 leading-6">Retour</button>
+                <button onclick="event.preventDefault(); window.history.back()" class="py-2 px-4 bg-red-200 text-gray-700 rounded-lg shadow-md font-semibold hover:bg-red-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50 leading-6">Retour</button>
                 <button type="submit" class="py-2 px-4 bg-emerald-500 text-white rounded-lg shadow-md font-semibold hover:bg-emerald-600 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-opacity-200">Modifier</button>
             </div>
         </form>

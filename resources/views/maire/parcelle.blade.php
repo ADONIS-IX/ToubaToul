@@ -1,10 +1,10 @@
 <x-layout title="Parcelle">
     {{-- Nav-side --}}
-    <nav class="fixed top-30 h-screen left-0 w-64 bg-emerald-900 text-white p-4 space-y-4">
+    <nav class="fixed top-30 left-0 h-full w-64 bg-emerald-900 text-white p-4 space-y-4">
         <h2 class="text-xl font-bold mb-4">Navigation</h2>
         <ul class="space-y-2">
             <li>
-                <a href="{{ route('maire.index') }}" class="flex items-center px-4 py-2 rounded transition duration-300  hover:bg-emerald-300">
+                <a href="{{ route('maire.index') }}" class="flex items-center px-4 py-2 rounded transition duration-300 hover:bg-emerald-300">
                     <i class="fas fa-tachometer-alt mr-2"></i> Tableau de Bord
                 </a>
             </li>
@@ -14,27 +14,32 @@
                 </a>
             </li>
             <li>
-                <a href="#" class="flex items-center px-4 py-2 rounded transition duration-300 hover:bg-yellow-500">
+                <a href="{{ route('parcelle') }}" class="flex items-center px-4 py-2 rounded transition duration-300 hover:bg-yellow-500">
                     <i class="fas fa-tree mr-2"></i> Voir les parcelles
                 </a>
             </li>
             <li>
-                <a href="{{ route('demande')}}" class="flex items-center px-4 py-2 rounded transition duration-300 hover:bg-yellow-500">
+                <a href="{{ route('demande') }}" class="flex items-center px-4 py-2 rounded transition duration-300 hover:bg-yellow-500">
                     <i class="fas fa-folder-open mr-2"></i> Voir les demandes
                 </a>
-                <li>
-                    <a href="{{ route('localite') }}" class="flex items-center px-4 py-2 rounded transition duration-300 hover:bg-yellow-500">
-                        <i class="fas fa-map-marker-alt mr-2"></i> Ajouter une Localite
-                    </a>
-                </li>
             </li>
             <li>
-                <a href="#" class="flex items-center px-4 py-2 rounded transition duration-300 hover:bg-yellow-500">
+                <a href="{{ route('localite') }}" class="flex items-center px-4 py-2 rounded transition duration-300 hover:bg-yellow-500">
+                    <i class="fas fa-map-marker-alt mr-2"></i> Ajouter une Localite
+                </a>
+            </li>
+             <li>
+                <a href="{{ route('localite') }}" class="flex items-center px-4 py-2 rounded transition duration-300 hover:bg-yellow-500">
+                    <i class="fas fa-map-marker-alt mr-2"></i> Ajouter un Chef de Localite
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('lotissement') }}" class="flex items-center px-4 py-2 rounded transition duration-300 hover:bg-yellow-500">
                     <i class="fas fa-map mr-2"></i> Creer un Lotissement
                 </a>
             </li>
             <li>
-                <a href="#" class="flex items-center px-4 py-2 rounded transition duration-300 hover:bg-yellow-500">
+                <a href="{{ route('support') }}" class="flex items-center px-4 py-2 rounded transition duration-300 hover:bg-yellow-500">
                     <i class="fas fa-life-ring mr-2"></i> Support
                 </a>
             </li>
@@ -53,27 +58,13 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 15.28V21a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-5.72M12 3v10c0 2.21-1.79 4-4 4s-4-1.79-4-4V3h8z" />
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 10l3 3 3-3m-3 3v-3" />
                         </svg>
-
                         <p class="ml-4 text-3xl text-black-400">{{ $totalBatie }}</p>
                     </span>
                     <h3 class="text-xl font-bold mb-2 mt-3 text-yblack-400">Statut:Baties</h3>
                     <p class="text-sm">Voir les parcelles baties</p>
                 </a>
             </div>
-            <div class="bg-white p-4 rounded-lg shadow-md hover:bg-emerald-50">
-                <a href="{{ route('parcelle', ['status' => '3']) }}">
-                    <span class="flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 15.28V21a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-5.72M12 3v10c0 2.21-1.79 4-4 4s-4-1.79-4-4V3h8z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 10l3 3 3-3m-3 3v-3" />
-                        </svg>
 
-                        <p class="ml-4 text-3xl text-black-400">{{ $totalConstruction }}</p>
-                    </span>
-                    <h3 class="text-xl font-bold mb-2 mt-3 text-black-400">Statut:Constructions</h3>
-                    <p class="text-sm">Voir les parcelles en constructions</p>
-                </a>
-            </div>
             <div class="bg-white p-4 rounded-lg shadow-md hover:bg-red-50">
                 <a href="{{ route('parcelle', ['status' => '1']) }}">
                     <span class="flex items-center">
@@ -81,7 +72,6 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 15.28V21a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-5.72M12 3v10c0 2.21-1.79 4-4 4s-4-1.79-4-4V3h8z" />
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 10l3 3 3-3m-3 3v-3" />
                         </svg>
-
                         <p class="ml-4 text-3xl text-black-400">{{ $totalLibre }}</p>
                     </span>
                     <h3 class="text-xl font-bold mb-2 mt-3 text-black-400">Statut:Libres</h3>
@@ -133,12 +123,9 @@
                         <th scope="col" class="py-3.5 pl-4 pr-3 uppercase font-semibold text-left text-sm sm:pl-3">ID</th>
                         <th scope="col" class="py-3.5 px-3 uppercase font-semibold text-left text-sm">NumeroLot</th>
                         <th scope="col" class="py-3.5 px-3 uppercase font-semibold text-left text-sm">Superficie</th>
-                        <th scope="col" class="py-3.5 px-3 uppercase font-semibold text-left text-sm">Coordonne x</th>
-                        <th scope="col" class="py-3.5 px-3 uppercase font-semibold text-left text-sm">Coordonne y</th>
+                        <th scope="col" class="py-3.5 px-3 uppercase font-semibold text-left text-sm">Proprietaire</th>
                         <th scope="col" class="py-3.5 px-3 uppercase font-semibold text-left text-sm">Lotissement</th>
-                        <th scope="col" class="py-3.5 px-3 uppercase font-semibold text-left text-sm">Statut  </th>
-                        <th scope="col" class="py-3.5 px-3 uppercase font-semibold text-left text-sm">Proprietaire ID</th>
-                        <th scope="col" class="py-3.5 px-3 uppercase font-semibold text-left text-sm"></th>
+                        <th scope="col" class="py-3.5 px-3 uppercase font-semibold text-left text-sm">Statut</th>
                         <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-3"></th>
                     </tr>
                 </thead>
@@ -148,15 +135,11 @@
                         <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-3">{{ $parcelle->id }}</td>
                         <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">{{ $parcelle->numeroLot }}</td>
                         <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">{{ $parcelle->superficie }}</td>
-                        <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">{{ $parcelle->coordonne_x }}</td>
-                        <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">{{ $parcelle->coordonne_y }}</td>
+                        <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">{{ $parcelle->user ? $parcelle->user->prenom . ' ' . $parcelle->user->nom : 'N/A' }}</td>
                         <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">{{ $parcelle->lotissement->titre }}</td>
                         <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">{{ $parcelle->statutParcelle->titre ?? 'N/A' }}</td>
-                        <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">
-                            {{ $parcelle->user ? $parcelle->user->prenom . ' ' . $parcelle->user->nom : 'N/A' }}
-                        </td>
                         <td class="whitespace-nowrap py-4 px-3 text-sm">
-                            <a href="{{ route('maire.show', $parcelle->id) }}" class="text-indigo-600 hover:text-emerald-400">Voir</a>
+                            <a href="{{ route('parcelles.show', $parcelle->id) }}" class="text-indigo-600 hover:text-emerald-400">Voir</a>
                         </td>
                     </tr>
                     @endforeach
